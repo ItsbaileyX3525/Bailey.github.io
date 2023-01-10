@@ -9,42 +9,47 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="button.css">
     <link rel="stylesheet" href="slider.css">
+    <link rel="stylesheet" href="sus.css">
     <link rel="shortcut icon" type="image/png" href="https://i.imgur.com/L1DXWO1.png">
 </head>
 <body style="background-color: rgb(67, 65, 65);">
 <left>
 <title>Projects</title>
-<div style="text-align: right;">Light mode:
-    <label class="switch">
-        <input type="checkbox" id="bg-switch">
-        <span class="slider round"></span>
-      </label>
-  
-      <script>
-        // define the function to add the toggle switch and event listener
-        function addToggleSwitch() {
-          // select the switch
-          const toggleSwitch = document.querySelector('input#bg-switch');
-  
-          // add a click event listener to the switch
-          toggleSwitch.addEventListener('click', function() {
-            // select the body element
-            const body = document.querySelector('body');
-  
-            // toggle the background color of the body
-            if (this.checked) {
-              body.style.backgroundColor = 'white';
-            } else {
-              body.style.backgroundColor = 'rgb(67, 65, 65)';
-            }
-          });
+  <label class="switch">
+    <input type="checkbox" id="bg-switch">
+    <span class="slider round"></span>
+  </label>
+  <img id="creamyballs" class="small-img" src="bright.png">
+  <script>
+    // define the function to add the toggle switch and event listener
+    function addToggleSwitch() {
+      // select the switch
+      
+      var playButton = document.getElementById("creamyballs");
+      const toggleSwitch = document.querySelector('input#bg-switch');
+
+      // add a click event listener to the switch
+      toggleSwitch.addEventListener('click', function() {
+        // select the body element
+        const body = document.querySelector('body');
+
+        // toggle the background color of the body
+        if (this.checked) {
+          body.style.backgroundColor = 'white';
+          playButton.src = "bright1.png";
+          
+
+        } else {
+          body.style.backgroundColor = 'rgb(67, 65, 65)';
+          playButton.src = "bright.png";
         }
-  
-        // call the function as soon as possible
-        addToggleSwitch();
-      </script></div>
+      });
+    }
+
+    // call the function as soon as possible
+    addToggleSwitch();
+  </script></div>
 <br>
-<button class="button-2" onclick="window.location.href='/Home'">Home</button>
 <div style="text-align: center;font-weight: normal;font-size: 40.0px;">
 <br>
 Welcome to the code sector:<br>
