@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>title</title>
+  <style>
+    body {
+      background-image: url('bg.mp4');
+      background-repeat: repeat;
+      background-size: cover;
+    }
+  </style>
+</head>
+<body>
+  <script src="taptapir.js"></script>
+  <script type="text/sunsnake">
+    set_background_color('#fff')
+    set_window_color('#fff')
+    text = Text(text='Suses:', text_origin=[0,0], scale=1, y=.2, text_size=8, value=0)
+    b = Button(text='Click me!', color=hsv(160,1,.6), scale=[.3,.15], text_color=color.white)
+    b.on_click = def():
+        text.value += 1
+        text.text = `Suses: ${text.value}`
+        b.scale = [e*1.25 for e in [.3,.15]]
+        b.animate('scale_x', .3, duration=.1)
+        b.animate('scale_y', .15, duration=.1)
+  </script>
+  <script src="sunsnake_compiler.js"></script>
+  
+  <<video autoplay muted loop id="myVideo" width="800" height="600">
+    <source src="bg.mp4" type="video/mp4">
+  </video>
+</body>
+</html>
