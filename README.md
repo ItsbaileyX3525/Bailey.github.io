@@ -1,1 +1,2 @@
-The website is hosted at htttps://baileyswebsite.ddns.net/
+# Personal webpage
+:globe_with_meridians: Link: https://baileyswebsite.ddns.net
