@@ -239,8 +239,7 @@ function compile(script) {
         compiled_code = compiled_code.replace(`[TEXT_CONTENT_${i}]`, `'${strings[i]}'`)
     }
 
-    print('COMPILED CODE:', compiled_code)
-    print('compiled in', performance.now() - t, 'ms')
+    print('compiled in', performance.now() - t, 'ms. ENJOY!')
     return compiled_code
 }
 
@@ -369,7 +368,6 @@ Array.prototype.myCustomFilter = function (fn) {
 var scripts = document.getElementsByTagName("script")
 for (var script of scripts) {
     if (script.type == 'text/sunsnake') {
-        print('compile:', script)
         compiled_code = compile(script.textContent)
         eval(compiled_code)
     }

@@ -27,32 +27,33 @@
   
   
   <script src="taptapir.js"></script>
-  <script type="text/sunsnake">
-    set_background_color('#fff')
-    set_window_color('#fff')
+  <!--Looking for the code? well here it is.--><script type="text/sunsnake">
+
     set_scale(2)
     xfloat=0
     print("Are you here to cheat?")
     print("If you want unlimted suses type text.value += 99999999")
     bg = Entity(texture='bg.gif',scale_x=1)
     floatingsus = Entity(texture='Red.png',scale=.05,y=-99)
-    text = Text(text='Suses:', text_origin=[0,0], scale=1, y=.4, text_size=4, value=0)
-    bgButton = Entity(texture='Red.png', scale=.3)
-    b = Button(text='Click me!', color=hsv(160,1,.6), scale=[.2,.2], text_color=color.white, alpha=0)
+    text = Text(text='Suses: 0', text_origin=[0,0], scale=1, y=.4, text_size=4, value=0)
+    bgButton = Entity(texture='Red.png', scale=.1)
+    b = Button(text='Click me!', color=hsv(160,1,.6), scale=[.04,.06], text_color=color.white, alpha=0)
     b.on_click = def():
         destroy(floatingsus)
         floatingsus = Entity(texture='Red.png',scale=.05,y=-.4,x=xfloat)
         text.value += 1
         text.text = `Suses: ${text.value}`
-        bgButton.scale = [e*1.25 for e in [.2,.2]]
-        bgButton.animate('scale_x', .2, duration=.1)
-        bgButton.animate('scale_y', .2, duration=.1)
+        bgButton.scale = [e*1.25 for e in [.05,.05]]
+        bgButton.animate('scale_x', .1, duration=.1)
+        bgButton.animate('scale_y', .1, duration=.1)
+    b2 = Button(text='Click me!', color=hsv(160,1,.6), scale=[.1,.1], text_color=color.white,x=.2,alpha=.8)
     def update():
         floatingsus.y+=.01
         xfloat+=0.1
         if xfloat >= '.48':
             xfloat=-.48
   </script>
+  <!--The code is above-->
   <script src="sunsnake_compiler.js"></script>
   
 </body>
