@@ -13,21 +13,20 @@
 <body>
   <script src="taptapir.js"></script>
   <script type="text/sunsnake">
-    set_background_color('#fff')
+    set_background_color('bg.mp4')
     set_window_color('#fff')
-    text = Text(text='Suses:', text_origin=[0,0], scale=1, y=.2, text_size=8, value=0)
-    b = Button(text='Click me!', color=hsv(160,1,.6), scale=[.3,.15], text_color=color.white)
+    floatingsus = Entity(texture='Red.png',scale=.05,y=-.2)
+    text = Text(text='Suses:', text_origin=[0,0], scale=1, y=.8, text_size=4, value=0)
+    bgButton = Entity(texture='Red.png', scale=.3)
+    b = Button(text='Click me!', color=hsv(160,1,.6), scale=[.2,.2], text_color=color.white, alpha=0)
     b.on_click = def():
         text.value += 1
         text.text = `Suses: ${text.value}`
-        b.scale = [e*1.25 for e in [.3,.15]]
-        b.animate('scale_x', .3, duration=.1)
-        b.animate('scale_y', .15, duration=.1)
+        bgButton.scale = [e*1.25 for e in [.2,.2]]
+        bgButton.animate('scale_x', .2, duration=.1)
+        bgButton.animate('scale_y', .2, duration=.1)
   </script>
   <script src="sunsnake_compiler.js"></script>
   
-  <<video autoplay muted loop id="myVideo" width="800" height="600">
-    <source src="bg.mp4" type="video/mp4">
-  </video>
 </body>
 </html>
