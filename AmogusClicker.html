@@ -45,7 +45,7 @@
     button3.on_click = def():
         if text.value>=button3.value:
             text.value -= button3.value
-            button3.cost+=500
+            button3.value+=500
             multiplier+=1
             text.text = `Suses: ${text.value}`
     button2 = Button(value=10,text='Sus\n Gen', x=.2, scale=.1, color=color.dark_gray)
