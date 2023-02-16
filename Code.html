@@ -24,31 +24,61 @@
   // define the function to add the toggle switch and event listener
   function addToggleSwitch() {
     // select the switch
-    
     var playButton = document.getElementById("creamyballs");
     const toggleSwitch = document.querySelector('input#bg-switch');
-
+    
+    toggleSwitch.checked = false;
+    const body = document.querySelector('body');
+    body.style.backgroundColor = 'white';
+    playButton.src = "https://i.imgur.com/IuX472M.png";
     // add a click event listener to the switch
     toggleSwitch.addEventListener('click', function() {
-      // select the body element
-      const body = document.querySelector('body');
 
       // toggle the background color of the body
       if (this.checked) {
-        body.style.backgroundColor = 'white';
-        playButton.src = "https://i.imgur.com/IuX472M.png";
-        
-
-      } else {
         body.style.backgroundColor = 'rgb(67, 65, 65)';
         playButton.src = "https://i.imgur.com/9GX9zEY.png";
+        body.classList.add('dark-mode');
+        body.classList.remove('light-mode');
+      } else {
+        body.style.backgroundColor = 'white';
+        playButton.src = "https://i.imgur.com/IuX472M.png";
+        body.classList.add('light-mode');
+        body.classList.remove('dark-mode');
+      }
+
+      // toggle the text color of the body
+      if (body.classList.contains('dark-mode')) {
+        body.classList.add('dark-text');
+        body.classList.remove('light-text');
+      } else {
+        body.classList.add('light-text');
+        body.classList.remove('dark-text');
       }
     });
   }
 
   // call the function as soon as possible
   addToggleSwitch();
-</script></div>
+</script>
+
+<style>
+  body.dark-mode {
+    background-color: rgb(67, 65, 65);
+  }
+
+  body.light-mode {
+    background-color: white;
+  }
+
+  body.dark-text {
+    color: rgb(194, 194, 194);
+  }
+
+  body.light-text {
+    color: black;
+  }
+</style>
 <br>
 <button class="button-2" onclick="window.location.href='/Home'">Home</button>
 <div style="text-align: center;font-weight: normal;font-size: 40.0px;">
