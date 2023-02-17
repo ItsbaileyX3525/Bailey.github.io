@@ -2,7 +2,9 @@ RewriteEngine on
 
 RewriteBase /
 
-RewriteRule ^([a-z])(.*)$ /${uc:first}$2 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/[a-z].*
+
+RewriteRule (.*) ${lc:$1} [R=301,L]
 
 RewriteCond %{REQUEST_FILENAME} !-d
 
