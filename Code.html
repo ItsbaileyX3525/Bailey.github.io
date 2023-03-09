@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="button.css">
     <link rel="stylesheet" href="slider.css">
     <link rel="stylesheet" href="sus.css">
-    <link rel="shortcut icon" type="image/png" href="icon.png">
+    <link rel="shortcut icon" type="image/png" href="assets/icon.png">
 </head>
 <body style="background-color: rgb(67, 65, 65);">
 <left>
@@ -30,19 +30,19 @@
     toggleSwitch.checked = false;
     const body = document.querySelector('body');
     body.style.backgroundColor = 'white';
-    playButton.src = "light.png";
+    playButton.src = "assets/light.png";
     // add a click event listener to the switch
     toggleSwitch.addEventListener('click', function() {
 
       // toggle the background color of the body
       if (this.checked) {
         body.style.backgroundColor = 'rgb(67, 65, 65)';
-        playButton.src = "dark.png";
+        playButton.src = "assets/dark.png";
         body.classList.add('dark-mode');
         body.classList.remove('light-mode');
       } else {
         body.style.backgroundColor = 'white';
-        playButton.src = "light.png";
+        playButton.src = "assets/light.png";
         body.classList.add('light-mode');
         body.classList.remove('dark-mode');
       }
