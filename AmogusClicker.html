@@ -8,7 +8,7 @@
 </head>
 <body>
   <img id="play-button" class="small-img" src="https://i.imgur.com/GfBVNac.png" alt="play-button">
-  <audio id="my-audio" src="bg music.mp3"></audio>
+  <audio id="my-audio" src="assets/bg music.mp3"></audio>
   
   <script>
     var playButton = document.getElementById("play-button");
@@ -37,11 +37,11 @@
     multiplier=1
     print("Are you here to cheat?")
     print("If you want unlimted suses type text.value += 99999999")
-    bg = Entity(texture='bg.gif',scale_x=1)
-    floatingsus = Entity(texture='Red.png',scale=.05,y=-99)
+    bg = Entity(texture='assets/bg.gif',scale_x=1)
+    floatingsus = Entity(texture='assets/Red.png',scale=.05,y=-99)
     text = Text(text='Suses: 0', text_origin=[0,0], scale=1, y=.4, text_size=4,text_color=color.white, value=0)
     textbg = Entity(color=color.black,alpha=.8,z=-1,y=.395,scale_x=.2,scale_y=.05)
-    bgButton = Entity(texture='Red.png', scale=.1)
+    bgButton = Entity(texture='assets/Red.png', scale=.1)
     button3 = Button(value=500,text='Pres', x=.35,y=.35, scale=.1, color=color.dark_gray)
     button3.on_click = def():
         if text.value>=button3.value:
@@ -63,7 +63,7 @@
     b = Button(text='Click me!', color=hsv(160,1,.6), scale=[.04,.06], text_color=color.white, alpha=0)
     b.on_click = def():
         destroy(floatingsus)
-        floatingsus = Entity(texture='Red.png',scale=.05,y=-.4,x=xfloat)
+        floatingsus = Entity(texture='assets/Red.png',scale=.05,y=-.4,x=xfloat)
         text.value += 1
         text.text = `Suses: ${text.value}`
         bgButton.scale = [e*1.25 for e in [.05,.05]]
