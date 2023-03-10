@@ -1,0 +1,98 @@
+
+<!DOCTYPE HTML>
+<!--generated with sswg-->
+
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <link rel="stylesheet" href="assets/sswg.css">
+    <link rel="stylesheet" href="assets/slider.css">
+    <link rel="stylesheet" href="assets/sus.css">
+    <link rel="shortcut icon" type="image/png" href="assets/icon.png">
+</head>
+<body style="background-color: rgb(67, 65, 65);">
+<left>
+<title>sunsnake</title>
+<label class="switch">
+    <input type="checkbox" id="bg-switch">
+    <span class="slider round"></span>
+  </label>
+  <img id="creamyballs" class="small-img" src="https://i.imgur.com/9GX9zEY.png">
+  <script>
+    // define the function to add the toggle switch and event listener
+    function addToggleSwitch() {
+      // select the switch
+      var playButton = document.getElementById("creamyballs");
+      const toggleSwitch = document.querySelector('input#bg-switch');
+      
+      toggleSwitch.checked = false;
+      const body = document.querySelector('body');
+      body.style.backgroundColor = 'white';
+      playButton.src = "assets/light.png";
+      // add a click event listener to the switch
+      toggleSwitch.addEventListener('click', function() {
+  
+        // toggle the background color of the body
+        if (this.checked) {
+          body.style.backgroundColor = 'rgb(67, 65, 65)';
+          playButton.src = "assets/dark.png";
+          body.classList.add('dark-mode');
+          body.classList.remove('light-mode');
+        } else {
+          body.style.backgroundColor = 'white';
+          playButton.src = "assets/light.png";
+          body.classList.add('light-mode');
+          body.classList.remove('dark-mode');
+        }
+  
+        // toggle the text color of the body
+        if (body.classList.contains('dark-mode')) {
+          body.classList.add('dark-text');
+          body.classList.remove('light-text');
+        } else {
+          body.classList.add('light-text');
+          body.classList.remove('dark-text');
+        }
+      });
+    }
+  
+    // call the function as soon as possible
+    addToggleSwitch();
+  </script>
+  
+  <style>
+    body.dark-mode {
+      background-color: rgb(67, 65, 65);
+    }
+  
+    body.light-mode {
+      background-color: white;
+    }
+  
+    body.dark-text {
+      color: rgb(194, 194, 194);
+    }
+  
+    body.light-text {
+      color: black;
+    }
+  </style>
+<br>
+
+<div style="text-align: center;font-weight: bold;font-family: arial;font-size: 100.0px;">
+SunSnake<br>
+<div style="text-align: center;font-weight: bold;font-family: arial;font-size: 50.0px;">
+What is SunSnake? <br>
+<br>
+<div style="text-align: left;font-weight: normal;font-family: arial;font-size: 25.0px;">
+If you are here you probably clicked the question mark next to the sunsnake text, anyways, sunsnake<br>
+is a coding language heavily based off of python, sunsnake is made Pokepetter, and if you dont know Pokepetter<br>
+then you wont know how my code is made, but anyways Poke made this sunsnake language so his software named 'Taptapir'<br>
+can read the sunsnake code and then compile it all into JS so while i do know how to write in JS myself<br>
+the games you'll see around the website are most likely built in sunsnake like <a href="/AmogusClicker">amogus clicker</a> <br>
+you can see the offical site <a href="https://pokepetter.github.io/taptapir/docs/documentation.html" target="_blank">here</a>
+<br>
+<br>
+<a href="/Home" style="color: #333333">Return to main webpage?</a>
+</body>
+</html>
