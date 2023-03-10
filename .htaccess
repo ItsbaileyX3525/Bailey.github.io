@@ -7,3 +7,8 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.html -f
 
 RewriteRule ^(.*)$ %1.html [NC,L]
+
+RewriteRule ^home$ /Home [R=301,L]
+RewriteRule ^code$ /Code [R=301,L]
+RewriteRule ^amogusclicker$ /AmogusClicker [R=301,L]
+RewriteRule ^sunsnake$ /Sunsnake [R=301,L]
