@@ -9,12 +9,11 @@
 <body>
   <img id="play-button" class="small-img" src="https://i.imgur.com/GfBVNac.png" alt="play-button">
   <audio id="my-audio" src="assets/bg music.mp3"></audio>
-  
   <script>
     var playButton = document.getElementById("play-button");
     var audio = document.getElementById("my-audio");
     var isPlaying = false;
-  
+    document.addEventListener('contextmenu', event => event.preventDefault());
     playButton.addEventListener("click", function() {
       if (!isPlaying) {
         playButton.src = "https://i.imgur.com/xpmo1c4.png";
