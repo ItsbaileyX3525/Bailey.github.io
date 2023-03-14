@@ -23,52 +23,79 @@
 <script>
   // define the function to add the toggle switch and event listener
   function addToggleSwitch() {
-    // select the switch
-    var playButton = document.getElementById("creamyballs");
-    const toggleSwitch = document.querySelector('input#bg-switch');
-    
-    // check for a previously saved state in localStorage
-    const darkMode = localStorage.getItem('darkMode');
-    if (darkMode) {
-      toggleSwitch.checked = true;
-      body.style.backgroundColor = 'rgb(67, 65, 65)';
-      document.querySelector('body').classList.add('dark-mode');
-    } else {
-      toggleSwitch.checked = false;
-      body.style.backgroundColor = 'white';
-      document.querySelector('body').classList.add('light-mode');
-    }
+  // select the switch
+  var playButton = document.getElementById("creamyballs");
+  const toggleSwitch = document.querySelector('input#bg-switch');
+  const darkMode = localStorage.getItem('dark-mode');
 
+  const body = document.querySelector('body');
+  // set the default background color
+  body.style.backgroundColor = darkMode ? 'rgb(67, 65, 65)' : 'white';
+
+  if (darkMode) {
+    toggleSwitch.checked = true;
+    playButton.src = "assets/dark.png";
     // add a click event listener to the switch
     toggleSwitch.addEventListener('click', function() {
 
       // toggle the background color of the body
       if (this.checked) {
-        document.querySelector('body').classList.add('dark-mode');
-        document.querySelector('body').classList.remove('light-mode');
-        localStorage.setItem('darkMode', 'true');
+        body.style.backgroundColor = 'rgb(67, 65, 65)';
+        playButton.src = "assets/dark.png";
+        body.classList.add('dark-mode');
+        body.classList.remove('light-mode');
+        localStorage.setItem('dark-mode', true);
       } else {
-        document.querySelector('body').classList.add('light-mode');
-        document.querySelector('body').classList.remove('dark-mode');
-        // remove the saved state from localStorage
-        localStorage.removeItem('darkMode');
+        body.style.backgroundColor = 'white';
+        playButton.src = "assets/light.png";
+        body.classList.add('light-mode');
+        body.classList.remove('dark-mode');
+        localStorage.removeItem('dark-mode');
       }
 
       // toggle the text color of the body
-      if (document.querySelector('body').classList.contains('dark-mode')) {
-        document.querySelector('body').classList.add('dark-text');
-        document.querySelector('body').classList.remove('light-text');
+      if (body.classList.contains('dark-mode')) {
+        body.classList.add('dark-text');
+        body.classList.remove('light-text');
       } else {
-        document.querySelector('body').classList.add('light-text');
-        document.querySelector('body').classList.remove('dark-text');
+        body.classList.add('light-text');
+        body.classList.remove('dark-text');
+      }
+    });
+  } else {
+    playButton.src = "assets/light.png";
+    // add a click event listener to the switch
+    toggleSwitch.addEventListener('click', function() {
+      if (this.checked) {
+        body.style.backgroundColor = 'rgb(67, 65, 65)';
+        playButton.src = "assets/dark.png";
+        body.classList.add('dark-mode');
+        body.classList.remove('light-mode');
+        localStorage.setItem('dark-mode', true);
+      } else {
+        body.style.backgroundColor = 'white';
+        playButton.src = "assets/light.png";
+        body.classList.add('light-mode');
+        body.classList.remove('dark-mode');
+        localStorage.removeItem('dark-mode');
+      }
+
+      // toggle the text color of the body
+      if (body.classList.contains('dark-mode')) {
+        body.classList.add('dark-text');
+        body.classList.remove('light-text');
+      } else {
+        body.classList.add('light-text');
+        body.classList.remove('dark-text');
       }
     });
   }
+}
 
   // call the function as soon as possible
   addToggleSwitch();
 </script>
-  
+
 <style>
   body.dark-mode {
     background-color: rgb(67, 65, 65);

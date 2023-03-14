@@ -20,14 +20,18 @@
   <script>
     // define the function to add the toggle switch and event listener
     function addToggleSwitch() {
-      // select the switch
-      var playButton = document.getElementById("creamyballs");
-      const toggleSwitch = document.querySelector('input#bg-switch');
-      
-      toggleSwitch.checked = false;
-      const body = document.querySelector('body');
-      body.style.backgroundColor = 'white';
-      playButton.src = "assets/light.png";
+    // select the switch
+    var playButton = document.getElementById("creamyballs");
+    const toggleSwitch = document.querySelector('input#bg-switch');
+    const darkMode = localStorage.getItem('dark-mode');
+  
+    const body = document.querySelector('body');
+    // set the default background color
+    body.style.backgroundColor = darkMode ? 'rgb(67, 65, 65)' : 'white';
+  
+    if (darkMode) {
+      toggleSwitch.checked = true;
+      playButton.src = "assets/dark.png";
       // add a click event listener to the switch
       toggleSwitch.addEventListener('click', function() {
   
@@ -37,11 +41,40 @@
           playButton.src = "assets/dark.png";
           body.classList.add('dark-mode');
           body.classList.remove('light-mode');
+          localStorage.setItem('dark-mode', true);
         } else {
           body.style.backgroundColor = 'white';
           playButton.src = "assets/light.png";
           body.classList.add('light-mode');
           body.classList.remove('dark-mode');
+          localStorage.removeItem('dark-mode');
+        }
+  
+        // toggle the text color of the body
+        if (body.classList.contains('dark-mode')) {
+          body.classList.add('dark-text');
+          body.classList.remove('light-text');
+        } else {
+          body.classList.add('light-text');
+          body.classList.remove('dark-text');
+        }
+      });
+    } else {
+      playButton.src = "assets/light.png";
+      // add a click event listener to the switch
+      toggleSwitch.addEventListener('click', function() {
+        if (this.checked) {
+          body.style.backgroundColor = 'rgb(67, 65, 65)';
+          playButton.src = "assets/dark.png";
+          body.classList.add('dark-mode');
+          body.classList.remove('light-mode');
+          localStorage.setItem('dark-mode', true);
+        } else {
+          body.style.backgroundColor = 'white';
+          playButton.src = "assets/light.png";
+          body.classList.add('light-mode');
+          body.classList.remove('dark-mode');
+          localStorage.removeItem('dark-mode');
         }
   
         // toggle the text color of the body
@@ -54,6 +87,7 @@
         }
       });
     }
+  }
   
     // call the function as soon as possible
     addToggleSwitch();
