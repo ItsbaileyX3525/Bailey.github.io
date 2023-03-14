@@ -31,9 +31,11 @@
     const darkMode = localStorage.getItem('darkMode');
     if (darkMode) {
       toggleSwitch.checked = true;
+      body.style.backgroundColor = 'rgb(67, 65, 65)';
       document.querySelector('body').classList.add('dark-mode');
     } else {
       toggleSwitch.checked = false;
+      body.style.backgroundColor = 'white';
       document.querySelector('body').classList.add('light-mode');
     }
 
@@ -44,7 +46,6 @@
       if (this.checked) {
         document.querySelector('body').classList.add('dark-mode');
         document.querySelector('body').classList.remove('light-mode');
-        // save the current state to localStorage
         localStorage.setItem('darkMode', 'true');
       } else {
         document.querySelector('body').classList.add('light-mode');
@@ -67,7 +68,7 @@
   // call the function as soon as possible
   addToggleSwitch();
 </script>
-
+  
 <style>
   body.dark-mode {
     background-color: rgb(67, 65, 65);
