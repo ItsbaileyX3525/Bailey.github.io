@@ -21,47 +21,53 @@
     <span class="slider round"></span>
   </label>
   <img id="creamyballs" class="small-img" src="assets/dark.png">
-  <script>
-    // define the function to add the toggle switch and event listener
-    function addToggleSwitch() {
-      // select the switch
-      var playButton = document.getElementById("creamyballs");
-      const toggleSwitch = document.querySelector('input#bg-switch');
-      
+<script>
+  // define the function to add the toggle switch and event listener
+  function addToggleSwitch() {
+    // select the switch
+    var playButton = document.getElementById("creamyballs");
+    const toggleSwitch = document.querySelector('input#bg-switch');
+    
+    // check for a previously saved state in localStorage
+    const darkMode = localStorage.getItem('darkMode');
+    if (darkMode) {
+      toggleSwitch.checked = true;
+      document.querySelector('body').classList.add('dark-mode');
+    } else {
       toggleSwitch.checked = false;
-      const body = document.querySelector('body');
-      body.style.backgroundColor = 'white';
-      playButton.src = "assets/light.png";
-      // add a click event listener to the switch
-      toggleSwitch.addEventListener('click', function() {
-  
-        // toggle the background color of the body
-        if (this.checked) {
-          body.style.backgroundColor = 'rgb(67, 65, 65)';
-          playButton.src = "assets/dark.png";
-          body.classList.add('dark-mode');
-          body.classList.remove('light-mode');
-        } else {
-          body.style.backgroundColor = 'white';
-          playButton.src = "assets/light.png";
-          body.classList.add('light-mode');
-          body.classList.remove('dark-mode');
-        }
-  
-        // toggle the text color of the body
-        if (body.classList.contains('dark-mode')) {
-          body.classList.add('dark-text');
-          body.classList.remove('light-text');
-        } else {
-          body.classList.add('light-text');
-          body.classList.remove('dark-text');
-        }
-      });
+      document.querySelector('body').classList.add('light-mode');
     }
-  
-    // call the function as soon as possible
-    addToggleSwitch();
-  </script>
+
+    // add a click event listener to the switch
+    toggleSwitch.addEventListener('click', function() {
+
+      // toggle the background color of the body
+      if (this.checked) {
+        document.querySelector('body').classList.add('dark-mode');
+        document.querySelector('body').classList.remove('light-mode');
+        // save the current state to localStorage
+        localStorage.setItem('darkMode', 'true');
+      } else {
+        document.querySelector('body').classList.add('light-mode');
+        document.querySelector('body').classList.remove('dark-mode');
+        // remove the saved state from localStorage
+        localStorage.removeItem('darkMode');
+      }
+
+      // toggle the text color of the body
+      if (document.querySelector('body').classList.contains('dark-mode')) {
+        document.querySelector('body').classList.add('dark-text');
+        document.querySelector('body').classList.remove('light-text');
+      } else {
+        document.querySelector('body').classList.add('light-text');
+        document.querySelector('body').classList.remove('dark-text');
+      }
+    });
+  }
+
+  // call the function as soon as possible
+  addToggleSwitch();
+</script>
   
   <style>
     body.dark-mode {
