@@ -32,7 +32,9 @@
   
     if (darkMode) {
       toggleSwitch.checked = true;
-      playButton.src = "assets/dark.png";
+      playButton.src = "assets/dark.png";    
+      body.classList.add('dark-text');
+      body.classList.remove('light-text');
       // add a click event listener to the switch
       toggleSwitch.addEventListener('click', function() {
   
@@ -43,6 +45,7 @@
           body.classList.add('dark-mode');
           body.classList.remove('light-mode');
           localStorage.setItem('dark-mode', true);
+
         } else {
           body.style.backgroundColor = 'white';
           playButton.src = "assets/light.png";
@@ -50,6 +53,7 @@
           body.classList.remove('dark-mode');
           localStorage.removeItem('dark-mode');
         }
+        
   
         // toggle the text color of the body
         if (body.classList.contains('dark-mode')) {
@@ -61,6 +65,8 @@
         }
       });
     } else {
+      body.classList.add('light-text');
+      body.classList.remove('dark-text');
       playButton.src = "assets/light.png";
       // add a click event listener to the switch
       toggleSwitch.addEventListener('click', function() {
@@ -93,7 +99,6 @@
     // call the function as soon as possible
     addToggleSwitch();
   </script>
-  
   <style>
     body.dark-mode {
       background-color: rgb(67, 65, 65);
