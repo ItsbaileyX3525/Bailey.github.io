@@ -28,7 +28,7 @@
   
     const body = document.querySelector('body');
     // set the default background color
-    body.style.backgroundColor = darkMode ? 'rgb(67, 65, 65)' : 'white';
+    body.style.backgroundColor = darkMode ? 'rgb(0, 0, 0)' : 'white';
   
     if (darkMode) {
       toggleSwitch.checked = true;
@@ -40,12 +40,12 @@
   
         // toggle the background color of the body
         if (this.checked) {
-          body.style.backgroundColor = 'rgb(67, 65, 65)';
+          body.style.backgroundColor = 'rgb(0, 0, 0)';
           playButton.src = "assets/dark.png";
           body.classList.add('dark-mode');
           body.classList.remove('light-mode');
           localStorage.setItem('dark-mode', true);
-
+  
         } else {
           body.style.backgroundColor = 'white';
           playButton.src = "assets/light.png";
@@ -71,7 +71,7 @@
       // add a click event listener to the switch
       toggleSwitch.addEventListener('click', function() {
         if (this.checked) {
-          body.style.backgroundColor = 'rgb(255, 255, 255)';
+          body.style.backgroundColor = 'rgb(0, 0, 0)';
           playButton.src = "assets/dark.png";
           body.classList.add('dark-mode');
           body.classList.remove('light-mode');
@@ -102,7 +102,7 @@
   
   <style>
     body.dark-text {
-      color: rgb(255, 255, 255);
+      color: rgb(194, 194, 194);
     }
   
     body.light-text {
