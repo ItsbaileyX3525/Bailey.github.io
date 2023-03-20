@@ -74,7 +74,7 @@
       // add a click event listener to the switch
       toggleSwitch.addEventListener('click', function() {
         if (this.checked) {
-          body.style.backgroundColor = 'rgb(67, 65, 65)';
+          body.style.backgroundColor = 'rgb(255, 255, 255)';
           playButton.src = "assets/dark.png";
           body.classList.add('dark-mode');
           body.classList.remove('light-mode');
@@ -104,16 +104,8 @@
   </script>
   
   <style>
-    body.dark-mode {
-      background-color: rgb(67, 65, 65);
-    }
-  
-    body.light-mode {
-      background-color: white;
-    }
-  
     body.dark-text {
-      color: rgb(194, 194, 194);
+      color: rgb(255, 255, 255);
     }
   
     body.light-text {
