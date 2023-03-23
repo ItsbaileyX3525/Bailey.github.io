@@ -1,0 +1,126 @@
+<!DOCTYPE html><head><meta name="viewport" content= "width=device-width, initial-scale=1.0"><link rel="stylesheet" type="text/css" href="tic.css"><script src="tic.js"></script></head><body><div id="main"><h1>TIC TAC TOE</h1><p id="ins">Game starts by just Tap on box<br><br>First Player starts as <b>Player X</b><br>And<br>Second Player as <b>Player 0</b> </p><br><br><input type="text" id="b1" onclick= "myfunc_3 (); myfunc ();" readonly><input type="text" id="b2" onclick= "myfunc_4 (); myfunc ();" readonly><input type="text" id="b3" onclick= "myfunc_5 (); myfunc ();" readonly><br><br><input type="text" id="b4" onclick= "myfunc_6 (); myfunc ();" readonly><input type="text" id="b5" onclick= "myfunc_7 (); myfunc ();" readonly><input type="text" id="b6"
+      onclick= "myfunc_8 (); myfunc ();"
+      readonly
+      ><br><br><!-- cells --><!-- cells --><!-- cells --><!-- cells --><!-- cells --><!-- cells --><!-- cells --><!-- cells --><!-- cells --></div></body></html>
+
+
+```css
+<style>
+
+h1 {
+  color: orangered;
+  font-size: 45px;
+}
+
+#b1,
+#b2,
+#b3,
+#b4,
+#b5,
+#b6,
+#b7,
+#b8,
+#b9 {
+  width: 80px;
+  height: 52px;
+  margin: auto;
+  border: 1px solid gray;
+  border-radius: 6px;
+  font-size: 30px;
+  text-align: center;
+}
+
+#but {
+  
+box-sizing: border-box;
+
+width:95px;
+
+height:40px;
+
+border :1px solid dodgerblue;
+
+margin:auto;
+
+border-radius :4px;
+
+font-family :Verdana, Geneva, Tahoma, sans-serif;
+
+background-color:dodgerblue;
+
+color:white;
+
+font-size :20px;
+
+cursor:pointer;
+
+
+}
+
+#print {
+
+font-family :Verdana, Geneva, Tahoma, sans-serif; 
+
+color:dodgerblue; 
+
+font-size :20px; 
+
+}
+
+text-align:center;}
+
+
+
+#ins {
+
+font-family :Verdana, Geneva, Tahoma, sans-serif; 
+
+color:dodgerblue; 
+
+font-size :17px; 
+
+}
+
+</style>
+
+```javascript
+// JavaScript code for the game logic
+
+// Get all the cells
+var cells = document.getElementsByTagName("input");
+
+// Create an array to store the values of each cell
+var board = ["", "", "", "", "", "", "", "", ""];
+
+// Create a variable to keep track of whose turn it is
+var turn = "X";
+
+// Add event listeners to each cell
+for (var i = 0; i < cells.length; i++) {
+cells[i].addEventListener("click", function() {
+// Get the id of the clicked cell
+var id = this.id;
+// Get the index of the cell in the board array
+var index = parseInt(id.charAt(1)) - 1;
+// Check if the cell is empty and it is a valid move
+if (board[index] == "" && checkWinner() == false) {
+// Update the cell value with X or O
+this.value = turn;
+// Update the board array with X or O
+board[index] = turn;
+// Check if there is a winner or a draw
+if (checkWinner() == true) {
+// Display an alert message with the winner
+alert(turn + " wins!");
+} else if (checkDraw() == true) {
+// Display an alert message with a draw
+alert("It's a draw!");
+} else {
+// Toggle the turn variable between X and O
+turn = turn == "X" ? "O" : "X";
+}
+}
+});
+}
+
+// Function to check if there is a winner by forming a straight line
