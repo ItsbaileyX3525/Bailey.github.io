@@ -18,116 +18,33 @@
   </label>
   <img id="creamyballs" class="small-img" src="assets/dark.png">
   <script>
-    // define the function to add the toggle switch and event listener
-    function addToggleSwitch() {
-    // select the switch
-    var playButton = document.getElementById("creamyballs");
-    const toggleSwitch = document.querySelector('input#bg-switch');
-    const darkMode = localStorage.getItem('dark-mode');
-  
-    const body = document.querySelector('body');
-    // set the default background color
-    body.style.backgroundColor = darkMode ? 'rgb(0, 0, 0)' : 'white';
-  
-    if (darkMode) {
-      toggleSwitch.checked = true;
-      playButton.src = "assets/dark.png";    
-      body.classList.add('dark-text');
-      body.classList.remove('light-text');
-      // add a click event listener to the switch
-      toggleSwitch.addEventListener('click', function() {
-  
-        // toggle the background color of the body
-        if (this.checked) {
-          body.style.backgroundColor = 'rgb(0, 0, 0)';
-          playButton.src = "assets/dark.png";
-          body.classList.add('dark-mode');
-          body.classList.remove('light-mode');
-          localStorage.setItem('dark-mode', true);
-  
-        } else {
-          body.style.backgroundColor = 'white';
-          playButton.src = "assets/light.png";
-          body.classList.add('light-mode');
-          body.classList.remove('dark-mode');
-          localStorage.removeItem('dark-mode');
-        }
-        
-  
-        // toggle the text color of the body
-        if (body.classList.contains('dark-mode')) {
-          body.classList.add('dark-text');
-          body.classList.remove('light-text');
-        } else {
-          body.classList.add('light-text');
-          body.classList.remove('dark-text');
-        }
-      });
-    } else {
-      body.classList.add('light-text');
-      body.classList.remove('dark-text');
-      playButton.src = "assets/light.png";
-      // add a click event listener to the switch
-      toggleSwitch.addEventListener('click', function() {
-        if (this.checked) {
-          body.style.backgroundColor = 'rgb(0, 0, 0)';
-          playButton.src = "assets/dark.png";
-          body.classList.add('dark-mode');
-          body.classList.remove('light-mode');
-          localStorage.setItem('dark-mode', true);
-        } else {
-          body.style.backgroundColor = 'white';
-          playButton.src = "assets/light.png";
-          body.classList.add('light-mode');
-          body.classList.remove('dark-mode');
-          localStorage.removeItem('dark-mode');
-        }
-  
-        // toggle the text color of the body
-        if (body.classList.contains('dark-mode')) {
-          body.classList.add('dark-text');
-          body.classList.remove('light-text');
-        } else {
-          body.classList.add('light-text');
-          body.classList.remove('dark-text');
-        }
-      });
+    const body = document.body;
+    const toggleSwitch = document.querySelector('#bg-switch');
+    const playButton = document.querySelector('#creamyballs');
+    
+    function toggleDarkMode() {
+      body.style.backgroundColor = toggleSwitch.checked ? '#000' : '#fff';
+      playButton.src = toggleSwitch.checked ? 'assets/dark.png' : 'assets/light.png';
+      body.classList.toggle('dark-text', toggleSwitch.checked);
+      body.classList.toggle('light-text', !toggleSwitch.checked);
+      localStorage.setItem('dark-mode', toggleSwitch.checked);
     }
-  }
-  
-    // call the function as soon as possible
-    addToggleSwitch();
-  </script>
-  
-  <style>
+    
+    toggleSwitch.checked = localStorage.getItem('dark-mode') === 'true';
+    toggleDarkMode();
+    
+    toggleSwitch.addEventListener('click', toggleDarkMode);
+    </script>
+    <style>
     body.dark-text {
-      color: rgb(255, 255, 255);
+      color: #fff;
     }
-  
+    
     body.light-text {
-      color: black;
+      color: #000;
     }
-  </style>
-<!DOCTYPE html>
-<html>
-    <button class="button-2" onclick="window.location.href='/Home'">Home</button>
-<head>
-	<title>About Me</title>
-	<style>
-		pre {
-			background-color: #333;
-			color: #fff;
-			padding: 1rem;
-			overflow-x: auto;
-		}
-		pre code {
-			white-space: nowrap;
-		}
-		.code-container {
-			border: 1px solid #333;
-			display: inline-block;
-		}
-	</style>
+    </style>
+    
 </head>
 <body>
     <div style="text-align: left;">
