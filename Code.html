@@ -15,41 +15,136 @@
 <body style="background-color: rgb(67, 65, 65);">
 <left>
 <title>Projects</title>
-<label class="switch">
-  <input type="checkbox" id="bg-switch">
-  <span class="slider round"></span>
-</label>
-<img id="creamyballs" class="small-img" src="https://i.imgur.com/9GX9zEY.png">
-<script>
-const body = document.body;
-const toggleSwitch = document.querySelector('#bg-switch');
-const playButton = document.querySelector('#creamyballs');
 
-function toggleDarkMode() {
-  body.style.backgroundColor = toggleSwitch.checked ? '#000' : '#fff';
-  playButton.src = toggleSwitch.checked ? 'assets/dark.png' : 'assets/light.png';
-  body.classList.toggle('dark-text', toggleSwitch.checked);
-  body.classList.toggle('light-text', !toggleSwitch.checked);
-  localStorage.setItem('dark-mode', toggleSwitch.checked);
-}
-
-toggleSwitch.checked = localStorage.getItem('dark-mode') === 'true';
-toggleDarkMode();
-
-toggleSwitch.addEventListener('click', toggleDarkMode);
-</script>
+<div class="menu-bar">
+  <button id="menu-button">
+    <img src="assets/56763.png" alt="Menu icon" width="48" height="48">
+  </button>
+  <div class="menu-items">
+    <button id="home-button">Home</button>
+    <button id="portfolio-button">Portfolio</button>
+    <button id="refresh-button">Refresh page</button>
+    <label class="switch">
+      <input type="checkbox" id="bg-switch">
+      <span class="slider round"></span>
+    </label>
+    <img id="creamyballs" class="small-img" src="assets/dark.png">
+  </div>
+</div>
 <style>
-body.dark-text {
-  color: #fff;
+  .menu-bar {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+background-color: #333;
+color: #fff;
+padding: 10px;
+box-sizing: border-box;
 }
 
-body.light-text {
-  color: #000;
+#menu-button {
+display: none;
+background-color: transparent;
+}
+
+.menu-items {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.menu-items button {
+background-color: transparent;
+border: none;
+color: #fff;
+font-size: 16px;
+cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+#menu-button {
+  display: block;
+}
+.menu-items {
+display: flex;
+justify-content: flex-end;
+align-items: center;
+height: 0;
+overflow: hidden;
+transition: height 0.3s ease-in-out;
+}
+.menu-items button {
+  margin-bottom: 10px;
+}
+.menu-items.show {
+height: 50px;
+}
 }
 </style>
+<script>
+const menuButton = document.getElementById('menu-button');
+const menuItems = document.querySelector('.menu-items');
+const homeButton = document.getElementById('home-button');
+const portfolioButton = document.getElementById('portfolio-button');
+const refreshButton = document.getElementById('refresh-button');
 
-<br>
-<button class="button-2" onclick="window.location.href='/Home'">Home</button>
+menuButton.addEventListener('click', () => {
+menuItems.classList.toggle('show');
+});
+
+homeButton.addEventListener('click', () => {
+window.location.href = '/Home';
+});
+
+portfolioButton.addEventListener('click', () => {
+window.location.href = '/Portfolio';
+});
+
+refreshButton.addEventListener('click', () => {
+window.location.reload();
+});
+
+window.addEventListener('resize', () => {
+if (window.innerWidth > 768) {
+  menuItems.classList.remove('show');
+}
+});
+</script><br><br><br>
+<div style="text-align: left;">
+<div style="font-size: 20px;">
+  <label class="switch">
+    <input type="checkbox" id="bg-switch">
+  </label>
+  <img id="creamyballs" class="small-img" src="assets/dark.png">
+  <script>
+    const body = document.body;
+    const toggleSwitch = document.querySelector('#bg-switch');
+    const playButton = document.querySelector('#creamyballs');
+    
+    function toggleDarkMode() {
+      body.style.backgroundColor = toggleSwitch.checked ? '#000' : '#fff';
+      playButton.src = toggleSwitch.checked ? 'assets/dark.png' : 'assets/light.png';
+      body.classList.toggle('dark-text', toggleSwitch.checked);
+      body.classList.toggle('light-text', !toggleSwitch.checked);
+      localStorage.setItem('dark-mode', toggleSwitch.checked);
+    }
+    
+    toggleSwitch.checked = localStorage.getItem('dark-mode') === 'true';
+    toggleDarkMode();
+    
+    toggleSwitch.addEventListener('click', toggleDarkMode);
+    </script>
+    <style>
+    body.dark-text {
+      color: #fff;
+    }
+    
+    body.light-text {
+      color: #000;
+    }
+    </style>
+    
 <div style="text-align: center;font-weight: bolder;font-size: 40.0px;">
 <br>
 Welcome to the code sector:<br>
