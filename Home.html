@@ -14,11 +14,106 @@
 <body style="background-color: rgb(67, 65, 65);">
 <left>
 <title>Home page</title>
+
+<div class="menu-bar">
+  <button id="menu-button">
+    <img src="assets/56763.png" alt="Menu icon" width="48" height="48">
+  </button>
+  <div class="menu-items">
+    <button id="code-button">Code</button>
+    <button id="portfolio-button">Portfolio</button>
+    <button id="refresh-button">Refresh page</button>
+    <label class="switch">
+      <input type="checkbox" id="bg-switch">
+      <span class="slider round"></span>
+    </label>
+    <img id="creamyballs" class="small-img" src="assets/dark.png">
+  </div>
+</div>
+<style>
+  .menu-bar {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+background-color: #333;
+color: #fff;
+padding: 10px;
+box-sizing: border-box;
+}
+
+#menu-button {
+display: none;
+background-color: transparent;
+}
+
+.menu-items {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.menu-items button {
+background-color: transparent;
+border: none;
+color: #fff;
+font-size: 16px;
+cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+#menu-button {
+  display: block;
+}
+.menu-items {
+display: flex;
+justify-content: flex-end;
+align-items: center;
+height: 0;
+overflow: hidden;
+transition: height 0.3s ease-in-out;
+}
+.menu-items button {
+  margin-bottom: 10px;
+}
+.menu-items.show {
+height: 50px;
+}
+}
+</style>
+<script>
+const menuButton = document.getElementById('menu-button');
+const menuItems = document.querySelector('.menu-items');
+const codeButton = document.getElementById('code-button');
+const portfolioButton = document.getElementById('portfolio-button');
+const refreshButton = document.getElementById('refresh-button');
+
+menuButton.addEventListener('click', () => {
+menuItems.classList.toggle('show');
+});
+
+codeButton.addEventListener('click', () => {
+window.location.href = '/Code';
+});
+
+portfolioButton.addEventListener('click', () => {
+window.location.href = '/Portfolio';
+});
+
+refreshButton.addEventListener('click', () => {
+window.location.reload();
+});
+
+window.addEventListener('resize', () => {
+if (window.innerWidth > 768) {
+  menuItems.classList.remove('show');
+}
+});
+</script><br><br><br>
 <div style="text-align: left;">
 <div style="font-size: 20px;">
   <label class="switch">
     <input type="checkbox" id="bg-switch">
-    <span class="slider round"></span>
   </label>
   <img id="creamyballs" class="small-img" src="assets/dark.png">
   <script>
@@ -49,10 +144,6 @@
     }
     </style>
     
-<button class="button-2" onclick="window.location.href='/Code'">Code</button>
-<button class="button-2" onclick="window.location.href='/Portfolio'">Portfolio</button>
-<button class="button-2" onclick="window.location.href='/Home'">refresh page</button>
-<br>
 <div style="text-align: center;font-weight: bold;font-family: arial;font-size: 60.0px;">
 <br>
 Welcome to my website! <br>
