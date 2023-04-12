@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html><title>Game1</title><body>
-<script src="/taptapir/taptapir.js"></script>
+<script src="taptapirs/taptapir.js"></script>
 <script type="text/sunsnake">
     set_orientation('horizontal')
+    ASSETS_FOLDER = 'Game1assets/'
     set_window_color('rgb(50 50 50)')
     set_background_color('rgb(9 9 1)')
     set_scale(0.95)
@@ -10,7 +11,7 @@
     movingRight=False
     movingLeft=False
     speed=.01
-    player=Entity(texture='Game1assets/happyboi.jpg',scale=.1)
+    player=Entity(texture='happyboi.jpg',scale=.1)
     def input(key):
         if key=='d':
             movingRight=True
@@ -28,4 +29,4 @@
     
 
 
-</script><script src="/taptapir/sunsnake_compiler.js"></script></html>
+</script><script src="taptapirs/sunsnake_compiler.js"></script></html>
