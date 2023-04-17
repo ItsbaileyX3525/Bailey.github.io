@@ -8,4 +8,12 @@
 </style>
     <iframe src="https://platformertaptapir.ddns.net"></iframe>
     <a href="https://platformertaptapir.ddns.net">Click here to go to offcial website.</a>
+    <script>
+    window.addEventListener("message", function(event) {
+        if (event.data === "user-interacted") {
+          localStorage.setItem("Interacted", "1");
+          window.location.href = '../Credits';
+        }
+      });
+      </script>
 </html>
