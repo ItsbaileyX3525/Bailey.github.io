@@ -26,9 +26,7 @@ startGame.on_click = def():
 
 # Variables
 susScore = localStorage.getItem("SusScore")
-susScore = parseInt(susScore, 10)
 multiplier = localStorage.getItem("SusMultiplier")
-multiplier = parseInt(multiplier, 10)
 
 if susScore == null:
     susScore = 0
@@ -36,6 +34,8 @@ if susScore == null:
 if multiplier == null or multiplier == 0:
     multiplier = 1
     localStorage.setItem("SusMultiplier", multiplier)
+susScore = parseInt(susScore, 10)
+multiplier = parseInt(multiplier, 10)
 susClicker = Button(scale=.15,x=-.4,color=color.clear,texture='Red.png')
 susClicker.on_click = def():
     susScore += 1 * multiplier
