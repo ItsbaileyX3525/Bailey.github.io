@@ -63,15 +63,14 @@ susClicker.on_click = def():
     susClick.currentTime = 0
     susClick.play()
 
-susGreen = Button(scale_x=.14,scale_y=.15, x=.4,y=.2,color=color.clear,texture='Green.png')
+susGreen = Button(scale_x=.14,scale_y=.15, x=.4,y=.2,color=color.clear,texture='Lime.png')
 susGreen.on_click = def():
     if susScore >= susGreenCost:
         if susGreens == 0:
             susGreenFunc()
         susScore -= susGreenCost
         susGreens += 1
-        susGreenCost *= 1.3
-        Math.round(susGreenCost)
+        susGreenCost *= 2
 
 def susGreenFunc():
     susScore += 5 * susGreens * multiplier
