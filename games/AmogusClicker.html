@@ -73,7 +73,7 @@ susGreen.on_click = def():
         susGreenCost *= 1.3
 
 def susGreenFunc():
-    susScore += 5 * multiplier
+    susScore += 5 * susGreens * multiplier
     after 1s:
         susGreenFunc()
 
@@ -84,6 +84,7 @@ def saveGame():
     localStorage.setItem("SusMultiplier", multiplier)
     localStorage.setItem("SusGreens", susGreens)
     localStorage.setItem("SusGreenCost", susGreenCost)
+saveGameHandler = Entity(update=saveGame,alpha=0)
 
 def update():
     susScoreText.text = `Suses: ${susScore}`
