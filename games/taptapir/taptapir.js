@@ -144,6 +144,9 @@ set_orientation('vertical')
 function rgb(r, g, b) {return `rgb(${parseInt(r*255)},${parseInt(g*255)},${parseInt(b*255)})`}
 
 function hex_to_rgb(value) {
+    if (value.length === 4) {
+        value = `#${value[1]}${value[1]}${value[2]}${value[2]}${value[3]}${value[3]}`   // convert '#333' to '#333333'
+    }
     try {
         r = value.slice(1,3)
         g = value.slice(3,5)
@@ -315,12 +318,20 @@ class Entity {
 
     get parent() {return this._parent}
     set parent(value) {
-        value.el.appendChild(this.el)
-        if (this._parent) {
+        if (value == null) {
+            value = scene
+        }
+        if (value === scene) {
+            value.appendChild(this.el)
+        }
+        else {
+            value.el.appendChild(this.el)
+        }
+        if (this._parent && this._parent._children) {
             this._parent.children.remove(self)
         }
         this._parent = value
-        if (!value.children.includes(this)) {
+        if (value._children && !value.children.includes(this)) {
             value.children.push(this)
         }
     }
@@ -742,28 +753,25 @@ class Camera{
 camera = new Camera({})
 camera.ui = new Entity({parent:camera, name:'ui', scale:[1,1], visible_self:false, z:-100, color:color.clear})
 
-function Button(options) {
-    if (!('parent' in options)) {
-        options['parent'] = camera.ui
-    }
-    if (!('scale' in options)) {
-        options['scale'] = [.2,.2]
-    }
-    if (!('roundness' in options)) {
-        options['roundness'] = .2
-    }
-    if (!('text_origin' in options)) {
-        options['text_origin'] = [0,0]
-    }
-    if ('scale' in options) {
-        if ('scale_x' in options) {
-            options['scale'][0] = options['scale_x']
+class Button extends Entity{
+    constructor(options=false) {
+        let settings = {parent:camera.ui, scale:[.2,.2], roundness:.2, text_origin:[0,0], }
+        for (const [key, value] of Object.entries(options)) {
+            settings[key] = value
         }
-        if ('scale_y' in options) {
-            options['scale'][1] = options['scale_y']
-        }
+        super(settings)
     }
-    return new Entity(options)
+}
+
+class Text extends Entity{
+    constructor(options=false) {
+        let settings = {parent:camera.ui, roundness:.05, padding:.75, z:-1, color:color.clear, scale_x:.8}
+
+        for (const [key, value] of Object.entries(options)) {
+            settings[key] = value
+        }
+        super(settings)
+    }
 }
 
 function Canvas(options) {
@@ -1117,33 +1125,6 @@ function stop_all_invokes() {
     }
 }
 
-
-function Text(options) {
-    if (!'scale' in options && !'scale_x' in options) {
-        options['scale_x'] = .8
-    }
-    if ('background' in options && options['background'] && !'color' in options) {
-        if (options['background'] == true) {
-            options['color'] = '#ffffff00'
-            options['alpha'] = .9
-        }
-        else {
-            options['color'] = options['background']
-        }
-        if (!'shadow' in options) {
-            options['shadow'] = 1
-        }
-    }
-
-    defaults = {'roundness':.05, 'padding':.75, 'z':-1, 'color':color.clear}
-    for (const [key, value] of Object.entries(defaults)) {
-        if (!(key in options)) {
-            options[key] = value
-        }
-    }
-    return new Entity(options)
-}
-
 function distance(a, b) {
     return sqrt((b[0] - a[0])**2 + (b[1] - a[1])**2)
 }
@@ -1208,8 +1189,8 @@ function sample(population, k){
 }
 
 function destroy(_entity) {
-    if (_entity._parent) {
-        _entity.parent.children.remove(_entity)
+    if (_entity._parent && _entity._parent._children) {
+        _entity._parent._children.remove(_entity)
     }
     _entity.el.remove()
     delete _entity
@@ -1259,7 +1240,7 @@ _renamed_keys = {'arrowdown':'down arrow', 'arrowup':'up arrow', 'arrowleft':'le
 input = null
 function _input(event) {
     if (event instanceof Event) {
-        if (event.type == 'mousewheel') {
+        if (event.type == 'wheel') {
             if (event.deltaY > 0) {key = 'scroll down'}
             else {key = 'scroll up'}
         }
@@ -1307,7 +1288,7 @@ function _input(event) {
 }
 document.addEventListener('keydown', _input)
 document.addEventListener('keyup', _input)
-document.addEventListener('mousewheel', _input); // modern desktop
+document.addEventListener('wheel', _input); // modern desktop
 
 
 // triple click in the lower right to enter fullscreen

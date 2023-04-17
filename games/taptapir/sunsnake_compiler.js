@@ -94,7 +94,6 @@ function compile(script) {
         lines[i] = lines[i].replaceAll('[-1]', '.at(-1)')
         lines[i] = lines[i].replaceAll(' # ', ' //')   // comments
 
-
         // list comprehention
         if (lines[i].includes('[') && lines[i].includes(']') && lines[i].includes(' for ') && lines[i].includes(' in ') && !lines[i].endsWith(':')) {
             // remove part before list comprehension
@@ -198,7 +197,7 @@ function compile(script) {
             lines[i] = lines[i].replace(`${word_before_in} in ${word_after_in}`, `${word_after_in}.includes(${word_before_in})`)
         }
 
-        for (var class_name of ['Button', 'Text', 'dict']) {
+        for (var class_name of ['dict', ]) {
             if (lines[i].includes(`${class_name}({`)) {
                 continue
             }
@@ -207,13 +206,11 @@ function compile(script) {
             }
         }
 
-        for (var class_name of ['Entity', 'HealthBar', 'RainbowSlider', 'InputField']) {
-            if (lines[i].includes(`${class_name}({`)) {
-                continue
-            }
-            if (lines[i].includes(`${class_name}(`)) {
+        for (var class_name of ['Entity', 'Button', 'Text', 'HealthBar', 'RainbowSlider', 'InputField']) {
+            is_first_word = lines[i].startsWith(`${class_name}(`) ? '' : ' '        // don't add space if line starts with 'Entity(', do add otherwise, to ensure we match the whole name
+            if (lines[i].includes(`${is_first_word}${class_name}(`)) {
+                lines[i] = lines[i].replace(`${is_first_word}${class_name}(`, `${is_first_word}new ${class_name}(`)
                 lines[i] = convert_arguments(lines[i], class_name)
-                lines[i] = lines[i].replace(`${class_name}(`, `new ${class_name}(`)
             }
         }
 
@@ -229,7 +226,7 @@ function compile(script) {
 
     // add brackets based on indentation
     current_indent = 0
-    is_in_after_block = false
+    after_statement_indents = []
 
     for (var i=0; i<lines.length; i++) {
         if (i > 0) {
@@ -244,29 +241,26 @@ function compile(script) {
             if (current_line_indent < prev_line_indent) {
                 for (var j of range(current_indent - current_line_indent)) {
                     lines[i-1] += '\n' + '    '.repeat(current_indent-j-1) + '}'
-                    if (is_in_after_block) {
+
+                    if (after_statement_indents.at(-1) === current_indent-j-1) {
                         lines[i-1] += ')'
-                        is_in_after_block = false
+                        after_statement_indents.pop()
                     }
                 }
                 current_indent = current_line_indent
             }
 
             if (lines[i].trimStart().startsWith('after(')) {
-                is_in_after_block = true;
+                after_statement_indents.push(current_indent)
             }
         }
     }
+
     new_line = ''
     for (var j of range(current_indent)) {
         new_line += '' + '    '.repeat(current_indent-1) + '}'
-        if (is_in_after_block) {
-            new_line += ')'
-            is_in_after_block = false
-        }
     }
     lines.push(new_line)
-
 
     var compiled_code = lines.join('\n')
 
@@ -275,7 +269,7 @@ function compile(script) {
         compiled_code = compiled_code.replace(`[TEXT_CONTENT_${i}]`, `'${strings[i]}'`)
     }
 
-    // print('COMPILED CODE:', compiled_code)
+    print('COMPILED CODE:', compiled_code)
     print('compiled in', performance.now() - t, 'ms')
     return compiled_code
 }
@@ -329,18 +323,8 @@ function convert_arguments(line, class_name) {
                 variable_name = variable_name.slice(4)
             }
             new_arguments = `name='${variable_name}', ${new_arguments}`
-            // print('variable_name:', variable_name)
-            // if line.includes(`= ${class_name}`) {
-                //
-                // }
-
         }
     }
-    // print('-cccccccccccccc-', keys)
-    // if ('name'  new_arguments) {
-    //
-    // }
-
     js_style_arguments = '{' + new_arguments.replaceAll('=', ':') + '}'
 
     if (has_inline_function) {
@@ -463,8 +447,5 @@ for (var script of scripts) {
             compiled_code = compile(script.textContent)
             eval(compiled_code)
         }
-        // else if (script.href) {
-        //     print(script)
-        // }
     }
 }
