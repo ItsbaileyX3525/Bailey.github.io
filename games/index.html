@@ -158,16 +158,57 @@ if (window.innerWidth > 768) {
     }
     </style>
     
-<br>
-<div style="align-items: center">
-  <a href="../games/Platformer"><button>Platformer</button></a>
-  <a href="../games/AmogusClicker"><button>Amogus Clicker</button></a>
+<br><br><br>
+<div style="text-align: center;">
+<a href="../games/Platformer"><button class="ebutton" style="font-size: 50px;">Platformer</button></a><br><br></div>
+Platformer is a project that me and my friend, <a href="https://github.com/RangerRhino23">RangerRhino23,</a>
+made together. Its built using pokepetter's taptapir software which
+allows games to be built in 2D while not needing any 
+good knowledge of javascript as it uses his own language sunsnake.
+Of course that being said you can still use javascript
+to make the game instead of using sunsnake but if you know
+python better then it's best you do it in sunsnake like we have<br>
+
+</head>
+<body>
+<div id="gallery">
+  <img class="active" src="../assets/game_preview1.png">
+  <img src="../assets/game_preview2.png">
+  <img src="../assets/game_preview3.png">
+  <img src="../assets/game_preview4.png">
+  <button class="nav-button left" onclick="prevImage()">&#10094;</button>
+  <button class="nav-button right" onclick="nextImage()">&#10095;</button>
 </div>
+<br><br><br>
+<div style="text-align: center;">
+<a href="../games/AmogusClicker"><button class="ebutton" style="font-size: 50px;">Amogus Clicker</button></a></div>
+Amogus clicker is my first taptapir game I made a few months ago 
+when i wanted to make a preview for my python game "sus clicker" which 
+was my first good game it took about a month to develop and 
+the one I had the most fun with.
+<br><br>
+It is still under development at this moment in time but
+I am working on it loads!
+<img src="../assets/sus preview1.png">
 
 
-
+<script>
+  let currentImage = 0;
+  const images = document.querySelectorAll('#gallery img');
+  function showImage(n) {
+    images[currentImage].classList.remove('active');
+    currentImage = (n + images.length) % images.length;
+    images[currentImage].classList.add('active');
+  }
+  function nextImage() {
+    showImage(currentImage + 1);
+  }
+  function prevImage() {
+    showImage(currentImage - 1);
+  }
+</script>
 <style>
-  button {
+  .ebutton {
     background-color: #0d014f;
     border: none; 
     color: rgb(255, 255, 255);
@@ -181,20 +222,50 @@ if (window.innerWidth > 768) {
     cursor: pointer;
     overflow: hidden;
   }
-  button a {
+  .ebutton a {
     display: block;
     width: 100%;
     height: 100%;
     text-decoration: none;
   }
-  button:hover {
+  .ebutton:hover {
     background-color: #000000; 
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); 
     transform: translateY(-2px);
   }
-  button span {
+  .ebutton span {
     pointer-events: none;
   }
-  </style>
+  #gallery {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  #gallery img {
+    display: none;
+    max-width: 100%;
+    height: auto;
+  }
+  #gallery img.active {
+    display: block;
+  }
+  .nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    outline: none;
+    cursor: pointer;
+  }
+  .nav-button.left {
+    left: 0;
+  }
+  .nav-button.right {
+    right: 0;
+  }
+</style>
 </body>
 </html>
