@@ -16,7 +16,7 @@
 ASSETS_FOLDER = 'AmogusClickerAssets/'
 set_orientation('horizontal')
 set_background_color('rgb(40,40,40)')
-set_window_color('rgb(23,23,23)')
+set_window_color('rgb(24,24,24)')
 
 
 startGame = Button(scale=3.1,text='Click to start game!',text_color=color.white,color=color.black,z=-9)
@@ -30,6 +30,8 @@ susScore = localStorage.getItem("SusScore")
 multiplier = localStorage.getItem("SusMultiplier")
 susGreens = localStorage.getItem("SusGreens")
 susGreenCost = localStorage.getItem("SusGreenCost")
+susPinkCost = localStorage.getItem("SusPinkCost")
+susPinks = localStorage.getItem("SusPinks")
 
 if susScore == null:
     susScore = 0
@@ -47,11 +49,21 @@ if susGreenCost == null or susGreenCost == 0:
     susGreenCost = 100
     localStorage.setItem("SusGreenCost", susGreenCost)
 
+if susPinks == null:
+    susPinks = 0
+    localStorage.setItem("SusPinks", susPinks)
+
+if susPinkCost == null or susPinkCost == 0:
+    susPinkCost = 250
+    localStorage.setItem("SusPinkCost", susPinkCost)
+
 # Parsing strings to ints
 susScore = parseInt(susScore, 10)
 multiplier = parseInt(multiplier, 10)
 susGreens = parseInt(susGreens, 10)
 susGreenCost = parseInt(susGreenCost, 10)
+susPinks = parseInt(susPinks, 10)
+susPinkCost = parseInt(susPinkCost, 10)
 
 susClicker = Button(scale=.2,x=-.4,color=color.clear,texture='Red.png')
 susClicker.on_click = def():
@@ -64,35 +76,69 @@ susClicker.on_click = def():
     susClick.currentTime = 0
     susClick.play()
 
-susGreen = Button(scale_x=.14,scale_y=.15, x=.4,y=.2,color=color.clear,texture='Lime.png')
+shopButton = Button(scale=.2,x=.6,texture='Shop.png')
+shopButton.on_click = def():
+    if not susClicker.enabled:
+        susClicker.enabled = True
+        susGreen.enabled = False
+        susPink.enabled = False
+    else:
+        susClicker.enabled = False
+        susGreen.enabled = True
+        susPink.enabled = True
+
+susGreen = Button(enabled=False,scale_x=.14,scale_y=.15, x=-.6,y=.3,color=color.clear,texture='Lime.png')
+
 susGreen.on_click = def():
     if susScore >= susGreenCost:
         if susGreens == 0:
             susGreenFunc()
         susScore -= susGreenCost
         susGreens += 1
-        susGreenCost *= 2
+        susGreenCost = Math.round(susGreenCost * 1.2)
 
 def susGreenFunc():
     susScore += 5 * susGreens * multiplier
     after 1s:
         susGreenFunc()
 
+susPink = Button(enabled=False,scale_x=.14,scale_y=.13, x=-.6,y=.1,color=color.clear,texture='Pink.png')
+
+susPink.on_click = def():
+    if susScore >= susPinkCost:
+        if susPinks == 0:
+            susGreenFunc()
+        susScore -= susGreenCost
+        susPinks += 1
+        susPinkCost = Math.round(susPinkCost * 1.2)
+
+def susPinkFunc():
+    susScore += 10 * susPinks * multiplier
+    after 1s:
+        susPinkFunc()
+
 susScoreText = Text(text_color=color.white,text=`Suses: ${susScore}`,x=0.3,y=-0.1)
+susScoreTextBackground = Entity(color=color.black,scale_x=2,scale_y=1)
+
 
 def saveGame():
     localStorage.setItem("SusScore", susScore)
     localStorage.setItem("SusMultiplier", multiplier)
     localStorage.setItem("SusGreens", susGreens)
     localStorage.setItem("SusGreenCost", susGreenCost)
+    localStorage.setItem("SusPinkCost", susPinkCost)
+    localStorage.setItem("SusPinks", susPinks)
 saveGameHandler = Entity(update=saveGame,alpha=0)
 
 def update():
     susScoreText.text = `Suses: ${susScore}`
+    susScoreTextBackground.fit_to_text(susScoreText)
 
 if susGreens > 0:
     susGreenFunc()
 
+if susPink > 0:
+    susPinkFunc()
 </script>
 <script src="taptapir/sunsnake_compiler.js"></script>
 
