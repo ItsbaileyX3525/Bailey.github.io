@@ -30,6 +30,7 @@ startGame.on_click = def():
 # Variables
 susScore = localStorage.getItem("SusScore")
 susScoreMultiplier = localStorage.getItem("SusScoreMultiplier")
+susScoreMultiplierCost = localStorage.getItem("SusScoreMultiplierCost")
 multiplier = localStorage.getItem("SusMultiplier")
 susGreens = localStorage.getItem("SusGreens")
 susGreenCost = localStorage.getItem("SusGreenCost")
@@ -43,6 +44,10 @@ if susScore == null:
 if susScoreMultiplier == null or susScoreMultiplier == 0
     susScoreMultiplier = 1
     localStorage.setItem("SusScoreMultiplier", susScoreMultiplier)
+
+if susScoreMultiplierCost == null or susScoreMultiplierCost == 0
+    susScoreMultiplierCost = 50
+    localStorage.setItem("SusScoreMultiplierCost", susScoreMultiplierCost)
 
 if multiplier == null or multiplier == 0:
     multiplier = 1
@@ -66,6 +71,8 @@ if susPinkCost == null or susPinkCost == 0:
 
 # Parsing strings to ints
 susScore = parseInt(susScore, 10)
+susScoreMultiplier = parseInt(susScoreMultiplier, 10)
+susScoreMultiplierCost = parseInt(susScoreMultiplierCost, 10)
 multiplier = parseInt(multiplier, 10)
 susGreens = parseInt(susGreens, 10)
 susGreenCost = parseInt(susGreenCost, 10)
@@ -88,10 +95,12 @@ shopButton.on_click = def():
         susClicker.enabled = True
         susGreen.enabled = False
         susPink.enabled = False
+        susClickerPowerup.enabled = False
     else:
         susClicker.enabled = False
         susGreen.enabled = True
         susPink.enabled = True
+        susClickerPowerup.enabled = True
 
 susGreen = Button(enabled=False,scale_x=.14,scale_y=.15, x=-.6,y=.3,color=color.clear,texture='Lime.png')
 
@@ -124,10 +133,15 @@ def susPinkFunc():
         susPinkFunc()
 
 susClickerPowerup = Button(enabled=False,x=.3,scale_y=.15,scale_x=.255,text='Click levelup.',)
+susClickerPowerup.on_click = def():
+    if susScore>=susScoreMultiplierCost:
+        susScore -= susScoreMultiplierCost
+        susScoreMultiplier += 1
+        susScoreMultiplierCost = Math.round(susScoreMultiplierCost*1.75)
 
-susScoreText = Text(text_color=color.white,text=`Suses: ${susScore}`,x=0.3,y=-0.1)
-susScoreTextBackground = Entity(color=color.white,scale_x=.2,scale_y=.1)
-
+susClickerPowerup.fit_to_text()
+susScoreText = Button(color=color.gray,text_color=color.black,text=`Suses: ${susScore}`,x=0,y=.4)
+susScoreText.fit_to_text()
 
 def saveGame():
     localStorage.setItem("SusScore", susScore)
@@ -137,11 +151,12 @@ def saveGame():
     localStorage.setItem("SusPinkCost", susPinkCost)
     localStorage.setItem("SusPinks", susPinks)
     localStorage.setItem("SusScoreMultiplier", susScoreMultiplier)
+    localStorage.setItem("SusScoreMultiplierCost", susScoreMultiplierCost)
 saveGameHandler = Entity(update=saveGame,alpha=0)
 
 def update():
     susScoreText.text = `Suses: ${susScore}`
-    susScoreTextBackground.fit_to_text(susScoreText)
+    susScoreText.fit_to_text()
 
 if susGreens > 0:
     susGreenFunc()
