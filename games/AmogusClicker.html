@@ -81,7 +81,7 @@ susPinkCost = parseInt(susPinkCost, 10)
 
 susClicker = Button(scale=.2,x=-.4,color=color.clear,texture='Red.png')
 susClicker.on_click = def():
-    susScore += 1 * multiplier
+    susScore += 1 * susScoreMultiplier
     susClicker.scale = [e*1.25 for e in [.23,.23]]
     susClicker.animate('scale_x', .2, duration=.1)
     susClicker.animate('scale_y', .2, duration=.1)
