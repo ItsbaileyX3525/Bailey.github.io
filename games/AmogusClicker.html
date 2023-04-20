@@ -8,6 +8,8 @@
 <script>
   susClick = new Audio("AmogusClickerAssets/sus.mp3")
   music = new Audio("AmogusClickerAssets/bg music.mp3")
+  // music.loop = true
+  susLevelUp = new Audio("AmogusClikcerAssets/sus1.mp3")
 </script>
   
   
@@ -27,6 +29,7 @@ startGame.on_click = def():
 
 # Variables
 susScore = localStorage.getItem("SusScore")
+susScoreMultiplier = localStorage.getItem("SusScoreMultiplier")
 multiplier = localStorage.getItem("SusMultiplier")
 susGreens = localStorage.getItem("SusGreens")
 susGreenCost = localStorage.getItem("SusGreenCost")
@@ -36,6 +39,10 @@ susPinks = localStorage.getItem("SusPinks")
 if susScore == null:
     susScore = 0
     localStorage.setItem("SusScore", susScore)
+
+if susScoreMultiplier == null or susScoreMultiplier == 0
+    susScoreMultiplier = 1
+    localStorage.setItem("SusScoreMultiplier", susScoreMultiplier)
 
 if multiplier == null or multiplier == 0:
     multiplier = 1
@@ -68,7 +75,6 @@ susPinkCost = parseInt(susPinkCost, 10)
 susClicker = Button(scale=.2,x=-.4,color=color.clear,texture='Red.png')
 susClicker.on_click = def():
     susScore += 1 * multiplier
-    print(multiplier)
     susClicker.scale = [e*1.25 for e in [.23,.23]]
     susClicker.animate('scale_x', .2, duration=.1)
     susClicker.animate('scale_y', .2, duration=.1)
@@ -107,8 +113,8 @@ susPink = Button(enabled=False,scale_x=.14,scale_y=.13, x=-.6,y=.1,color=color.c
 susPink.on_click = def():
     if susScore >= susPinkCost:
         if susPinks == 0:
-            susGreenFunc()
-        susScore -= susGreenCost
+            susPinkFunc()
+        susScore -= susPinkCost
         susPinks += 1
         susPinkCost = Math.round(susPinkCost * 1.2)
 
@@ -116,6 +122,8 @@ def susPinkFunc():
     susScore += 10 * susPinks * multiplier
     after 1s:
         susPinkFunc()
+
+susClickerPowerup = Button(enabled=False,x=.3,scale_y=.15,scale_x=.255,text='Click levelup.',)
 
 susScoreText = Text(text_color=color.white,text=`Suses: ${susScore}`,x=0.3,y=-0.1)
 susScoreTextBackground = Entity(color=color.white,scale_x=.2,scale_y=.1)
@@ -128,17 +136,17 @@ def saveGame():
     localStorage.setItem("SusGreenCost", susGreenCost)
     localStorage.setItem("SusPinkCost", susPinkCost)
     localStorage.setItem("SusPinks", susPinks)
+    localStorage.setItem("SusScoreMultiplier", susScoreMultiplier)
 saveGameHandler = Entity(update=saveGame,alpha=0)
 
 def update():
     susScoreText.text = `Suses: ${susScore}`
     susScoreTextBackground.fit_to_text(susScoreText)
-    print(susScoreTextBackground.position)
 
 if susGreens > 0:
     susGreenFunc()
 
-if susPink > 0:
+if susPinks > 0:
     susPinkFunc()
 </script>
 <script src="taptapir/sunsnake_compiler.js"></script>
