@@ -4,7 +4,6 @@
   <title>Amogus clicker</title>
   <link rel="shortcut icon" type="image/png" href="AmogusClickerAssets/Red.png">
 </head>
-
 <body>
 <script>
   susClick = new Audio("AmogusClickerAssets/sus.mp3")
@@ -29,29 +28,25 @@ startGame.on_click = def():
     set_fullscreen(True)
 
 /*
-audioPlayer = Button(scale=.2)
-audioPlayer.on_click = def():
-    const fileInput = document.createElement('input');
-    fileInput.type = 'file';
+const fileInput = document.createElement('input');
+fileInput.type = 'file';
 
-    const audioPlayer = new Audio();
-    audioPlayer.loop = true;
-    audioPlayer.style.position = 'fixed';
-    audioPlayer.style.zIndex = '9999';
-    audioPlayer.style.top = '0';
-    audioPlayer.style.left = '0';
+const audioPlayer = new Audio();
+audioPlayer.loop = true;
 
-    fileInput.addEventListener('change', function() {
+fileInput.addEventListener('change', function() {
     const file = fileInput.files[0];
     const fileURL = URL.createObjectURL(file);
     audioPlayer.src = fileURL;
     audioPlayer.play();
-    });
+});
 
-    document.body.appendChild(fileInput);
-    document.body.appendChild(audioPlayer);
+document.body.appendChild(fileInput);
+document.body.appendChild(audioPlayer);
+    
+e=Entity()
+e.type= file
 */
-
 
 # Variables
 susScore = localStorage.getItem("SusScore")
