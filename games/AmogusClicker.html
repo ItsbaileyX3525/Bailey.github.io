@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Amogus clicker</title>
+  <link rel="shortcut icon" type="image/png" href="AmogusClickerAssets/Red.png">
+</head>
+<body>
+<script>
+  susClick = new Audio("AmogusClickerAssets/sus.mp3")
+  music = new Audio("AmogusClickerAssets/bg music.mp3")
+  music.loop = true
+  susLevelUp = new Audio("AmogusClikcerAssets/sus1.mp3")
+</script>
+  
+  
+<script src="taptapir/taptapir.js"></script>
+<script type="text/sunsnake">
+ASSETS_FOLDER = 'AmogusClickerAssets/'
+set_orientation('horizontal')
+set_background_color('rgb(40,40,40)')
+set_window_color('rgb(24,24,24)')
+
+
+startGame = Button(scale=3.1,text='Click to start game!',text_color=color.white,color=color.black,z=-9)
+startGame.on_click = def():
+    music.play()
+    startGame.enabled=False
+    set_fullscreen(True)
+
+#Audio picker
+const fileInput = document.createElement('input');
+fileInput.type = 'file';
+fileInput.style.borderRadius = '10px';
+
+const audioPlayer = new Audio();
+audioPlayer.loop = true;
+
+fileInput.addEventListener('change', function() {
+    music.pause();
+    const file = fileInput.files[0];
+    const fileURL = URL.createObjectURL(file);
+    audioPlayer.src = fileURL;
+    audioPlayer.play();
+});
+document.body.appendChild(audioPlayer);
+    
+e = Button(scale_y=.1,scale_x=.3,y=.4,x=-.5,text='Upload music')
+e.el.appendChild(fileInput)
+
+
+# Variables
+susScore = localStorage.getItem("SusScore")
+susScoreMultiplier = localStorage.getItem("SusScoreMultiplier")
+susScoreMultiplierCost = localStorage.getItem("SusScoreMultiplierCost")
+multiplier = localStorage.getItem("SusMultiplier")
+susGreens = localStorage.getItem("SusGreens")
+susGreenCost = localStorage.getItem("SusGreenCost")
+susPinkCost = localStorage.getItem("SusPinkCost")
+susPinks = localStorage.getItem("SusPinks")
+
+if susScore == null:
+    susScore = 0
+    localStorage.setItem("SusScore", susScore)
+
+if susScoreMultiplier == null or susScoreMultiplier == 0
+    susScoreMultiplier = 1
+    localStorage.setItem("SusScoreMultiplier", susScoreMultiplier)
+
+if susScoreMultiplierCost == null or susScoreMultiplierCost == 0
+    susScoreMultiplierCost = 50
+    localStorage.setItem("SusScoreMultiplierCost", susScoreMultiplierCost)
+
+if multiplier == null or multiplier == 0:
+    multiplier = 1
+    localStorage.setItem("SusMultiplier", multiplier)
+
+if susGreens == null:
+    susGreens = 0
+    localStorage.setItem("SusGreens", susGreens)
+
+if susGreenCost == null or susGreenCost == 0:
+    susGreenCost = 100
+    localStorage.setItem("SusGreenCost", susGreenCost)
+
+if susPinks == null:
+    susPinks = 0
+    localStorage.setItem("SusPinks", susPinks)
+
+if susPinkCost == null or susPinkCost == 0:
+    susPinkCost = 250
+    localStorage.setItem("SusPinkCost", susPinkCost)
+
+# Parsing strings to ints
+susScore = parseInt(susScore, 10)
+susScoreMultiplier = parseInt(susScoreMultiplier, 10)
+susScoreMultiplierCost = parseInt(susScoreMultiplierCost, 10)
+multiplier = parseInt(multiplier, 10)
+susGreens = parseInt(susGreens, 10)
+susGreenCost = parseInt(susGreenCost, 10)
+susPinks = parseInt(susPinks, 10)
+susPinkCost = parseInt(susPinkCost, 10)
+
+susClicker = Button(scale=.2,x=-.4,color=color.clear,texture='Red.png')
+susClicker.on_click = def():
+    susScore += 1 * susScoreMultiplier
+    susClicker.scale = [e*1.25 for e in [.23,.23]]
+    susClicker.animate('scale_x', .2, duration=.1)
+    susClicker.animate('scale_y', .2, duration=.1)
+    susClick.pause()
+    susClick.currentTime = 0
+    susClick.play()
+
+shopButton = Button(scale=.2,x=.6,texture='Shop.png')
+shopButton.on_click = def():
+    if not susClicker.enabled:
+        susClicker.enabled = True
+        susGreen.enabled = False
+        susPink.enabled = False
+        susClickerPowerup.enabled = False
+    else:
+        susClicker.enabled = False
+        susGreen.enabled = True
+        susPink.enabled = True
+        susClickerPowerup.enabled = True
+
+susGreen = Button(enabled=False,scale_x=.14,scale_y=.15, x=-.6,y=.3,color=color.clear,texture='Lime.png')
+
+susGreen.on_click = def():
+    if susScore >= susGreenCost:
+        if susGreens == 0:
+            susGreenFunc()
+        susScore -= susGreenCost
+        susGreens += 1
+        susGreenCost = Math.round(susGreenCost * 1.2)
+
+def susGreenFunc():
+    susScore += 5 * susGreens * multiplier
+    after 1s:
+        susGreenFunc()
+
+susPink = Button(enabled=False,scale_x=.14,scale_y=.13, x=-.6,y=.1,color=color.clear,texture='Pink.png')
+
+susPink.on_click = def():
+    if susScore >= susPinkCost:
+        if susPinks == 0:
+            susPinkFunc()
+        susScore -= susPinkCost
+        susPinks += 1
+        susPinkCost = Math.round(susPinkCost * 1.2)
+
+def susPinkFunc():
+    susScore += 10 * susPinks * multiplier
+    after 1s:
+        susPinkFunc()
+
+susClickerPowerup = Button(enabled=False,x=.3,scale_y=.15,scale_x=.255,text='Click levelup.',)
+susClickerPowerup.on_click = def():
+    if susScore>=susScoreMultiplierCost:
+        susScore -= susScoreMultiplierCost
+        susScoreMultiplier += 1
+        susScoreMultiplierCost = Math.round(susScoreMultiplierCost*1.75)
+
+susClickerPowerup.fit_to_text()
+susScoreText = Button(color=color.gray,text_color=color.black,text=`Suses: ${susScore}`,x=0,y=.4)
+susScoreText.fit_to_text()
+
+def saveGame():
+    localStorage.setItem("SusScore", susScore)
+    localStorage.setItem("SusMultiplier", multiplier)
+    localStorage.setItem("SusGreens", susGreens)
+    localStorage.setItem("SusGreenCost", susGreenCost)
+    localStorage.setItem("SusPinkCost", susPinkCost)
+    localStorage.setItem("SusPinks", susPinks)
+    localStorage.setItem("SusScoreMultiplier", susScoreMultiplier)
+    localStorage.setItem("SusScoreMultiplierCost", susScoreMultiplierCost)
+saveGameHandler = Entity(update=saveGame,alpha=0)
+
+def update():
+    susScoreText.text = `Suses: ${susScore}`
+    susScoreText.fit_to_text()
+
+if susGreens > 0:
+    susGreenFunc()
+
+if susPinks > 0:
+    susPinkFunc()
+</script>
+<script src="taptapir/sunsnake_compiler.js"></script>
+
+</body>
+</html>
