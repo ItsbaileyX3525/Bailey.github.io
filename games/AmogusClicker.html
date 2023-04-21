@@ -114,6 +114,7 @@ shopButton = Button(scale=.2,x=.6,texture='Shop.png')
 shopButton.on_click = def():
     if not susClicker.enabled:
         susClicker.enabled = True
+        e.enabled = True
         susGreen.enabled = False
         susPink.enabled = False
         susClickerPowerup.enabled = False
@@ -122,6 +123,7 @@ shopButton.on_click = def():
         susGreen.enabled = True
         susPink.enabled = True
         susClickerPowerup.enabled = True
+        e.enabled = False
 
 susGreen = Button(enabled=False,scale_x=.14,scale_y=.15, x=-.6,y=.3,color=color.clear,texture='Lime.png')
 
