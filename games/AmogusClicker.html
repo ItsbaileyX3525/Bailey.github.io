@@ -20,6 +20,7 @@ set_orientation('horizontal')
 set_background_color('rgb(40,40,40)')
 set_window_color('rgb(24,24,24)')
 
+background = Entity(texture='bg.gif', scale=[1.8,1.005], z=10)
 
 startGame = Button(scale=3.1,text='Click to start game!',text_color=color.white,color=color.black,z=-9)
 startGame.on_click = def():
