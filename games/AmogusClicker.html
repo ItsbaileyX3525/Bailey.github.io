@@ -27,37 +27,62 @@ startGame.on_click = def():
     music.play()
     startGame.enabled=False
     set_fullscreen(True)
+    if localStorage.getItem("MusicMuted") == "true":
+        muteMusic = Button(x=.7,y=.4,enabled=True,scale=.15,texture='SpeakerMute.png')
+        music.pause();
+        music.currentTime = 0;
+    else:
+        muteMusic = Button(x=.7,y=.4,enabled=True,scale=.15,texture='Speaker.png')
+    muteMusic.on_click = def():
+        if muteMusic.texture == 'Speaker.png':
+            music.pause();
+            muteMusic.texture = 'SpeakerMute.png'
+            localStorage.setItem("MusicMuted", true)
+            print(localStorage.getItem("MusicMuted"))
+        else:
+            music.play()
+            muteMusic.texture = 'Speaker.png' 
+            localStorage.setItem("MusicMuted", false)
+            print(localStorage.getItem("MusicMuted"))
+
+
 
 #Audio picker
 const fileInput = document.createElement('input');
 fileInput.type = 'file';
 fileInput.style.borderRadius = '10px';
 fileInput.style.opacity = 0;
-const audioPlayer = new Audio();
-audioPlayer.loop = true;
+
 
 fileInput.addEventListener('change', function() {
-    music.pause();
     const file = fileInput.files[0];
     const fileURL = URL.createObjectURL(file);
-    audioPlayer.src = fileURL;
-    audioPlayer.play();
+    music.src = fileURL;
+    music.play();
 });
-document.body.appendChild(audioPlayer);
+
     
-e = Button(scale_y=.1,scale_x=.3,y=.4,x=-.5,text='Upload music')
+e = Button(scale_y=.1,scale_x=.3,y=.4,x=-.5,text='Change music')
 e.el.appendChild(fileInput)
 e.fit_to_text()
+
+
 
 # Variables
 susScore = localStorage.getItem("SusScore")
 susScoreMultiplier = localStorage.getItem("SusScoreMultiplier")
 susScoreMultiplierCost = localStorage.getItem("SusScoreMultiplierCost")
 multiplier = localStorage.getItem("SusMultiplier")
+multiplierCost = localStorage.getItem("SusMultiplierCost")
 susGreens = localStorage.getItem("SusGreens")
 susGreenCost = localStorage.getItem("SusGreenCost")
 susPinkCost = localStorage.getItem("SusPinkCost")
 susPinks = localStorage.getItem("SusPinks")
+stopGen = False
+
+if localStorage.getItem("MusicMuted") == null
+    musicMuted = false
+    localStorage.setItem("MusicMuted", musicMuted)
 
 if susScore == null:
     susScore = 0
@@ -74,6 +99,10 @@ if susScoreMultiplierCost == null or susScoreMultiplierCost == 0
 if multiplier == null or multiplier == 0:
     multiplier = 1
     localStorage.setItem("SusMultiplier", multiplier)
+
+if multiplierCost == null or multiplierCost == 0:
+    multiplierCost = 15000
+    localStorage.setItem("SusMultiplierCost", multiplierCost)
 
 if susGreens == null:
     susGreens = 0
@@ -96,6 +125,7 @@ susScore = parseInt(susScore, 10)
 susScoreMultiplier = parseInt(susScoreMultiplier, 10)
 susScoreMultiplierCost = parseInt(susScoreMultiplierCost, 10)
 multiplier = parseInt(multiplier, 10)
+multiplierCost = parseInt(multiplierCost, 10)
 susGreens = parseInt(susGreens, 10)
 susGreenCost = parseInt(susGreenCost, 10)
 susPinks = parseInt(susPinks, 10)
@@ -116,45 +146,68 @@ shopButton.on_click = def():
     if not susClicker.enabled:
         susClicker.enabled = True
         e.enabled = True
+        susPrestige.enabled = False
         susGreen.enabled = False
         susPink.enabled = False
         susClickerPowerup.enabled = False
     else:
         susClicker.enabled = False
+        e.enabled = False
+        susPrestige.enabled = True
         susGreen.enabled = True
         susPink.enabled = True
         susClickerPowerup.enabled = True
-        e.enabled = False
+        
+
+susPrestige = Button(enabled=False,scale_x=.39,scale_y=.2,texture='Prestige.png',x=-.6,y=-.2)
+
+susPrestige.on_click = def():
+    if susScore >= multiplierCost:
+        susScore = 0
+        multiplier += 1
+        stopGen = True
+        multiplierCost += Math.round(multiplierCost * 1.3)
+        susPinks = 0
+        susGreens = 0
+        susGreenCost = 100
+        susPinkCost = 250
+        susScoreMultiplier = 1
+        susScoreMultiplierCost = 50
+        after 1.1s:
+            stopGen = False
+
 
 susGreen = Button(enabled=False,scale_x=.14,scale_y=.15, x=-.6,y=.3,color=color.clear,texture='Lime.png')
 
 susGreen.on_click = def():
-    if susScore >= susGreenCost:
+    if susScore >= susGreenCost and not stopGen:
         if susGreens == 0:
             susGreenFunc()
         susScore -= susGreenCost
         susGreens += 1
-        susGreenCost = Math.round(susGreenCost * 1.2)
+        susGreenCost = Math.round(susGreenCost * 1.15)
 
 def susGreenFunc():
     susScore += 5 * susGreens * multiplier
     after 1s:
-        susGreenFunc()
+        if not stopGen:
+            susGreenFunc()
 
-susPink = Button(enabled=False,scale_x=.14,scale_y=.13, x=-.6,y=.1,color=color.clear,texture='Pink.png')
+susPink = Button(enabled=False,scale_x=.15,scale_y=.13, x=-.6,y=.1,color=color.clear,texture='Pink.png')
 
 susPink.on_click = def():
-    if susScore >= susPinkCost:
+    if susScore >= susPinkCost and not stopGen:
         if susPinks == 0:
             susPinkFunc()
         susScore -= susPinkCost
         susPinks += 1
-        susPinkCost = Math.round(susPinkCost * 1.2)
+        susPinkCost = Math.round(susPinkCost * 1.15)
 
 def susPinkFunc():
     susScore += 10 * susPinks * multiplier
     after 1s:
-        susPinkFunc()
+        if not stopGen:
+            susPinkFunc()
 
 susClickerPowerup = Button(enabled=False,x=.3,scale_y=.15,scale_x=.255,text='Click levelup.',)
 susClickerPowerup.on_click = def():
@@ -170,6 +223,7 @@ susScoreText.fit_to_text()
 def saveGame():
     localStorage.setItem("SusScore", susScore)
     localStorage.setItem("SusMultiplier", multiplier)
+    localStorage.setItem("SusMultiplierCost", multiplierCost)
     localStorage.setItem("SusGreens", susGreens)
     localStorage.setItem("SusGreenCost", susGreenCost)
     localStorage.setItem("SusPinkCost", susPinkCost)
