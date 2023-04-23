@@ -9,7 +9,7 @@
   susClick = new Audio("AmogusClickerAssets/sus.mp3")
   music = new Audio("AmogusClickerAssets/bg music.mp3")
   music.loop = true
-  susLevelUp = new Audio("AmogusClikcerAssets/sus1.mp3")
+  susLevelUp = new Audio("AmogusClickerAssets/sus1.mp3")
 </script>
   
   
@@ -215,7 +215,7 @@ susClickerPowerup.on_click = def():
         susScore -= susScoreMultiplierCost
         susScoreMultiplier += 1
         susScoreMultiplierCost = Math.round(susScoreMultiplierCost*1.75)
-
+        susLevelUp.play()
 susClickerPowerup.fit_to_text()
 susScoreText = Button(color=color.gray,text_color=color.black,text=`Suses: ${susScore}`,x=0,y=.4)
 susScoreText.fit_to_text()
@@ -230,7 +230,9 @@ def saveGame():
     localStorage.setItem("SusPinks", susPinks)
     localStorage.setItem("SusScoreMultiplier", susScoreMultiplier)
     localStorage.setItem("SusScoreMultiplierCost", susScoreMultiplierCost)
-saveGameHandler = Entity(update=saveGame,alpha=0)
+    after 1s:
+        saveGame()
+saveGame()
 
 def update():
     susScoreText.text = `Suses: ${susScore}`
