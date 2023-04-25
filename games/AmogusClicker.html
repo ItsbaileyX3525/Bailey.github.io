@@ -48,6 +48,7 @@ if localStorage.getItem("ClickMuted") == "true":
 else:
     muteMusic.texture = 'Speaker.png'
 
+#muteClick = Button(x=-.6,y=-.2,enabled=True,scale=.15,texture='SpeakerMute.png')
 
 muteClick = Button(x=-.6,y=-.2,enabled=False,scale=.15,texture='SpeakerMute.png')
 muteClick.on_click = def():
@@ -78,6 +79,20 @@ settingsButton.on_click = def():
         muteMusic.enabled = True
         e.enabled = True
         muteClick.enabled = True
+        shopButton.enabled = False
+        susClicker.enabled = False
+        susScoreText.enabled = False
+settingsButton = Button(enabled=True,scale=.1,texture="Settings.png",x=.7,y=.4)
+settingsButton.on_click = def():
+    if muteMusic.enabled:
+        muteMusic.enabled = False
+        e.enabled = False
+        shopButton.enabled = True
+        susClicker.enabled = True
+        susScoreText.enabled = True
+    else:
+        muteMusic.enabled = True
+        e.enabled = True
         shopButton.enabled = False
         susClicker.enabled = False
         susScoreText.enabled = False
