@@ -2,12 +2,12 @@
 <html>
 <head>
   <title>Amogus clicker</title>
-  <link rel="shortcut icon" type="image/png" href="AmogusClickerAssets/Red.png">
+  <link rel="shortcut icon" type="image/png" href="AmogusClickerAssets/PokeClicker/Pokepetter.png">
 </head>
 <body>
 <script>
   susClick = new Audio("AmogusClickerAssets/PokeClicker/sus.mp3")
-  music = new Audio("AmogusClickerAssets/bg music.mp3")
+  music = new Audio("AmogusClickerAssets/PokeClicker/music.mp3")
   music.loop = true
   susLevelUp = new Audio("AmogusClickerAssets/sus1.mp3")
 </script>
@@ -22,7 +22,7 @@ set_window_color('rgb(24,24,24)')
 
 background = Entity(texture='PokeClicker/bg.gif', scale=[1.8,1.005], z=10)
 settingsBackgroud = Entity(enabled=False,texture='PokeClicker/Pokepetter.png', scale=[1.8,1.005], z=10)
-
+ 
 startGame = Button(scale=3.1,text='Click to start game!',text_color=color.white,color=color.black,z=-9)
 startGame.on_click = def():
     if localStorage.getItem("PMusicMuted") == "true":
