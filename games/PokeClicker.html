@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Amogus clicker</title>
+  <link rel="shortcut icon" type="image/png" href="AmogusClickerAssets/Red.png">
+</head>
+<body>
+<script>
+  susClick = new Audio("AmogusClickerAssets/PokeClicker/sus.mp3")
+  music = new Audio("AmogusClickerAssets/bg music.mp3")
+  music.loop = true
+  susLevelUp = new Audio("AmogusClickerAssets/sus1.mp3")
+</script>
+  
+  
+<script src="taptapir/taptapir.js"></script>
+<script type="text/sunsnake">
+ASSETS_FOLDER = 'AmogusClickerAssets/'
+set_orientation('horizontal')
+set_background_color('rgb(40,40,40)')
+set_window_color('rgb(24,24,24)')
+
+background = Entity(texture='PokeClicker/bg.gif', scale=[1.8,1.005], z=10)
+settingsBackgroud = Entity(enabled=False,texture='PokeClicker/Pokepetter.png', scale=[1.8,1.005], z=10)
+
+startGame = Button(scale=3.1,text='Click to start game!',text_color=color.white,color=color.black,z=-9)
+startGame.on_click = def():
+    if localStorage.getItem("PMusicMuted") == "true":
+        music.pause();
+        music.currentTime = 0;
+    else:
+        music.play()
+    startGame.enabled=False
+    set_fullscreen(True)
+
+muteMusic = Button(x=-.6,y=.2,enabled=False,scale=.15,texture='SpeakerMute.png')
+muteMusic.on_click = def():
+    if muteMusic.texture == 'Speaker.png':
+        music.pause();
+        muteMusic.texture = 'SpeakerMute.png'
+        localStorage.setItem("PMusicMuted", true)
+    else:
+        music.play()
+        muteMusic.texture = 'Speaker.png'
+        localStorage.setItem("PMusicMuted", false)  
+
+if localStorage.getItem("PMusicMuted") == "true":
+    muteMusic.texture = 'SpeakerMute.png'
+else:
+    muteMusic.texture = 'Speaker.png'
+
+
+muteClick = Button(x=-.6,y=-.2,enabled=False,scale=.15,texture='SpeakerMute.png')
+muteClick.on_click = def():
+    if muteClick.texture == 'Speaker.png':
+        susClick.volume = 0;
+        muteClick.texture = 'SpeakerMute.png'
+        localStorage.setItem("PClickerMuted", true)
+    else:
+        susClick.volume = 1;
+        muteClick.texture = 'Speaker.png' 
+        localStorage.setItem("PClickerMuted", false) 
+
+if localStorage.getItem("PClickMuted") == "true":
+    muteClick.texture = 'SpeakerMute.png'
+else:
+    muteClick.texture = 'Speaker.png'
+
+muteMusicText = Text(enabled=False,text_color=color.white,text='Mute music',y=-.2725,x=-.1)
+muteClickText = Text(enabled=False,text_color=color.white,text='Mute click sounds',y=-.665,x=-.1)
+
+
+settingsButton = Button(enabled=True,scale=.1,texture="Settings.png",x=.7,y=.4)
+settingsButton.on_click = def():
+    if muteMusic.enabled:
+        muteMusic.enabled = False
+        e.enabled = False
+        muteClick.enabled = False
+        background.enabled = True
+        settingsBackgroud.enabled = False
+        muteClickText.enabled = False
+        muteMusicText.enabled = False
+        shopButton.enabled = True
+        susClicker.enabled = True
+        susScoreText.enabled = True
+    else:
+        muteMusic.enabled = True
+        e.enabled = True
+        muteClick.enabled = True
+        settingsBackgroud.enabled = True
+        background.enabled = False
+        muteClickText.enabled = True
+        muteMusicText.enabled = True
+        shopButton.enabled = False
+        susClicker.enabled = False
+        susScoreText.enabled = False
+
+#Audio picker
+const fileInput = document.createElement('input');
+fileInput.type = 'file';
+fileInput.style.borderRadius = '10px';
+fileInput.style.opacity = 0;
+
+
+fileInput.addEventListener('change', function() {
+    const file = fileInput.files[0];
+    const fileURL = URL.createObjectURL(file);
+    music.src = fileURL;
+    music.play();
+});
+
+    
+e = Button(enabled=False,scale_y=.1,scale_x=.3,y=.4,x=0,text='Change music')
+e.el.appendChild(fileInput)
+e.fit_to_text()
+
+
+
+# Variables
+susScore = localStorage.getItem("PSusScore")
+susScoreMultiplier = localStorage.getItem("PSusScoreMultiplier")
+susScoreMultiplierCost = localStorage.getItem("PSusScoreMultiplierCost")
+multiplier = localStorage.getItem("PSusMultiplier")
+multiplierCost = localStorage.getItem("PSusMultiplierCost")
+susGreens = localStorage.getItem("PSusGreens")
+susGreenCost = localStorage.getItem("PSusGreenCost")
+susPinkCost = localStorage.getItem("PSusPinkCost")
+susPinks = localStorage.getItem("PSusPinks")
+stopGen = False
+
+if localStorage.getItem("PMusicMuted") == null
+    musicMuted = false
+    localStorage.setItem("PMusicMuted", musicMuted)
+
+if localStorage.getItem("PClickMuted") == null
+    clickMuted = false
+    localStorage.setItem("PClickMuted", clickMuted)
+
+if susScore == null:
+    susScore = 0
+    localStorage.setItem("PSusScore", susScore)
+
+if susScoreMultiplier == null or susScoreMultiplier == 0
+    susScoreMultiplier = 1
+    localStorage.setItem("PSusScoreMultiplier", susScoreMultiplier)
+
+if susScoreMultiplierCost == null or susScoreMultiplierCost == 0
+    susScoreMultiplierCost = 50
+    localStorage.setItem("PSusScoreMultiplierCost", susScoreMultiplierCost)
+
+if multiplier == null or multiplier == 0:
+    multiplier = 1
+    localStorage.setItem("PSusMultiplier", multiplier)
+
+if multiplierCost == null or multiplierCost == 0:
+    multiplierCost = 15000
+    localStorage.setItem("PSusMultiplierCost", multiplierCost)
+
+if susGreens == null:
+    susGreens = 0
+    localStorage.setItem("PSusGreens", susGreens)
+
+if susGreenCost == null or susGreenCost == 0:
+    susGreenCost = 100
+    localStorage.setItem("PSusGreenCost", susGreenCost)
+
+if susPinks == null:
+    susPinks = 0
+    localStorage.setItem("PSusPinks", susPinks)
+
+if susPinkCost == null or susPinkCost == 0:
+    susPinkCost = 250
+    localStorage.setItem("PSusPinkCost", susPinkCost)
+
+# Parsing strings to ints
+susScore = parseInt(susScore, 10)
+susScoreMultiplier = parseInt(susScoreMultiplier, 10)
+susScoreMultiplierCost = parseInt(susScoreMultiplierCost, 10)
+multiplier = parseInt(multiplier, 10)
+multiplierCost = parseInt(multiplierCost, 10)
+susGreens = parseInt(susGreens, 10)
+susGreenCost = parseInt(susGreenCost, 10)
+susPinks = parseInt(susPinks, 10)
+susPinkCost = parseInt(susPinkCost, 10)
+
+susClicker = Button(scale=.25,x=-.4,color=color.clear,texture='PokeClicker/Pokepetter.png')
+susClicker.on_click = def():
+    susScore += 1 * susScoreMultiplier
+    susClicker.scale = [e*1.25 for e in [.23,.23]]
+    susClicker.animate('scale_x', .2, duration=.1)
+    susClicker.animate('scale_y', .2, duration=.1)
+    susClick.pause()
+    susClick.currentTime = 0
+    susClick.play()
+
+shopButton = Button(enabled=True,scale=.2,x=.6,texture='Shop.png')
+shopButton.on_click = def():
+    if not susClicker.enabled:
+        susClicker.enabled = True
+        settingsButton.enabled = True
+        susPrestige.enabled = False
+        susGreen.enabled = False
+        susPink.enabled = False
+        susClickerPowerup.enabled = False
+    else:
+        susClicker.enabled = False
+        settingsButton.enabled = False
+        susPrestige.enabled = True
+        susGreen.enabled = True
+        susPink.enabled = True
+        susClickerPowerup.enabled = True
+        if muteMusic.enabled:
+            muteMusic.enabled = False
+            settingsButton.enabled = True
+        
+
+susPrestige = Button(enabled=False,scale_x=.39,scale_y=.2,texture='Prestige.png',x=-.3,y=0)
+
+susPrestige.on_click = def():
+    if susScore >= multiplierCost:
+        susScore = 0
+        multiplier += 1
+        stopGen = True
+        multiplierCost += Math.round(multiplierCost * 1.3)
+        susPinks = 0
+        susGreens = 0
+        susGreenCost = 100
+        susPinkCost = 250
+        susScoreMultiplier = 1
+        susScoreMultiplierCost = 50
+        after 1.1s:
+            stopGen = False
+
+
+susGreen = Button(enabled=False,scale_x=.3,scale_y=.3, x=-.6,y=.3,color=color.clear,texture='PokeClicker/Pokepetter.png')
+
+susGreen.on_click = def():
+    if susScore >= susGreenCost and not stopGen:
+        if susGreens == 0:
+            susGreenFunc()
+        susScore -= susGreenCost
+        susGreens += 1
+        susGreenCost = Math.round(susGreenCost * 1.15)
+
+def susGreenFunc():
+    susScore += 5 * susGreens * multiplier
+    after 1s:
+        if not stopGen:
+            susGreenFunc()
+
+susPink = Button(enabled=False,scale_x=.3,scale_y=.3, x=-.6,y=-.1,color=color.clear,texture='PokeClicker/Pokepetter.png')
+
+susPink.on_click = def():
+    if susScore >= susPinkCost and not stopGen:
+        if susPinks == 0:
+            susPinkFunc()
+        susScore -= susPinkCost
+        susPinks += 1
+        susPinkCost = Math.round(susPinkCost * 1.15)
+
+def susPinkFunc():
+    susScore += 10 * susPinks * multiplier
+    after 1s:
+        if not stopGen:
+            susPinkFunc()
+
+susClickerPowerup = Button(enabled=False,x=.3,scale_y=.15,scale_x=.255,text='Click levelup.',)
+susClickerPowerup.on_click = def():
+    if susScore>=susScoreMultiplierCost:
+        susScore -= susScoreMultiplierCost
+        susScoreMultiplier += 1
+        susScoreMultiplierCost = Math.round(susScoreMultiplierCost*1.75)
+        susLevelUp.play()
+susClickerPowerup.fit_to_text()
+susScoreText = Button(enabled=True,color=color.gray,text_color=color.black,text=`Suses: ${susScore}`,x=0,y=.4)
+susScoreText.fit_to_text()
+
+def saveGame():
+    localStorage.setItem("PSusScore", susScore)
+    localStorage.setItem("PSusMultiplier", multiplier)
+    localStorage.setItem("PSusMultiplierCost", multiplierCost)
+    localStorage.setItem("PSusGreens", susGreens)
+    localStorage.setItem("PSusGreenCost", susGreenCost)
+    localStorage.setItem("PSusPinkCost", susPinkCost)
+    localStorage.setItem("PSusPinks", susPinks)
+    localStorage.setItem("PSusScoreMultiplier", susScoreMultiplier)
+    localStorage.setItem("PSusScoreMultiplierCost", susScoreMultiplierCost)
+    after 1s:
+        saveGame()
+saveGame()
+
+def update():
+    susScoreText.text = `Suses: ${susScore}`
+    susScoreText.fit_to_text()
+
+if susGreens > 0:
+    susGreenFunc()
+
+if susPinks > 0:
+    susPinkFunc()
+</script>
+<script src="taptapir/sunsnake_compiler.js"></script>
+
+</body>
+</html>
