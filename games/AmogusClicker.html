@@ -24,28 +24,46 @@ background = Entity(texture='bg.gif', scale=[1.8,1.005], z=10)
 
 startGame = Button(scale=3.1,text='Click to start game!',text_color=color.white,color=color.black,z=-9)
 startGame.on_click = def():
-    music.play()
-    startGame.enabled=False
-    set_fullscreen(True)
     if localStorage.getItem("MusicMuted") == "true":
-        muteMusic = Button(x=.7,y=.4,enabled=True,scale=.15,texture='SpeakerMute.png')
         music.pause();
         music.currentTime = 0;
     else:
-        muteMusic = Button(x=.7,y=.4,enabled=True,scale=.15,texture='Speaker.png')
-    muteMusic.on_click = def():
-        if muteMusic.texture == 'Speaker.png':
-            music.pause();
-            muteMusic.texture = 'SpeakerMute.png'
-            localStorage.setItem("MusicMuted", true)
-            print(localStorage.getItem("MusicMuted"))
-        else:
-            music.play()
-            muteMusic.texture = 'Speaker.png' 
-            localStorage.setItem("MusicMuted", false)
-            print(localStorage.getItem("MusicMuted"))
+        music.play()
+    startGame.enabled=False
+    set_fullscreen(True)
 
+muteMusic = Button(x=-.6,y=.2,enabled=False,scale=.15,texture='SpeakerMute.png')
+muteMusic.on_click = def():
+    if muteMusic.texture == 'Speaker.png':
+        music.pause();
+        muteMusic.texture = 'SpeakerMute.png'
+        localStorage.setItem("MusicMuted", true)
+    else:
+        music.play()
+        muteMusic.texture = 'Speaker.png' 
+        localStorage.setItem("MusicMuted", false)  
 
+if localStorage.getItem("MusicMuted") == "true":
+    muteMusic.texture = 'SpeakerMute.png'
+else:
+    muteMusic.texture = 'Speaker.png'
+
+#muteClick = Button(x=-.6,y=-.2,enabled=True,scale=.15,texture='SpeakerMute.png')
+
+settingsButton = Button(enabled=True,scale=.1,texture="Settings.png",x=.7,y=.4)
+settingsButton.on_click = def():
+    if muteMusic.enabled:
+        muteMusic.enabled = False
+        e.enabled = False
+        shopButton.enabled = True
+        susClicker.enabled = True
+        susScoreText.enabled = True
+    else:
+        muteMusic.enabled = True
+        e.enabled = True
+        shopButton.enabled = False
+        susClicker.enabled = False
+        susScoreText.enabled = False
 
 #Audio picker
 const fileInput = document.createElement('input');
@@ -62,7 +80,7 @@ fileInput.addEventListener('change', function() {
 });
 
     
-e = Button(scale_y=.1,scale_x=.3,y=.4,x=-.5,text='Change music')
+e = Button(enabled=False,scale_y=.1,scale_x=.3,y=.4,x=-.5,text='Change music')
 e.el.appendChild(fileInput)
 e.fit_to_text()
 
@@ -83,6 +101,10 @@ stopGen = False
 if localStorage.getItem("MusicMuted") == null
     musicMuted = false
     localStorage.setItem("MusicMuted", musicMuted)
+
+if localStorage.getItem("ClickMuted") == null
+    clickMuted = false
+    localStorage.setItem("ClickMuted", clickMuted)
 
 if susScore == null:
     susScore = 0
@@ -141,22 +163,25 @@ susClicker.on_click = def():
     susClick.currentTime = 0
     susClick.play()
 
-shopButton = Button(scale=.2,x=.6,texture='Shop.png')
+shopButton = Button(enabled=True,scale=.2,x=.6,texture='Shop.png')
 shopButton.on_click = def():
     if not susClicker.enabled:
         susClicker.enabled = True
-        e.enabled = True
+        settingsButton.enabled = True
         susPrestige.enabled = False
         susGreen.enabled = False
         susPink.enabled = False
         susClickerPowerup.enabled = False
     else:
         susClicker.enabled = False
-        e.enabled = False
+        settingsButton.enabled = False
         susPrestige.enabled = True
         susGreen.enabled = True
         susPink.enabled = True
         susClickerPowerup.enabled = True
+        if muteMusic.enabled:
+            muteMusic.enabled = False
+            settingsButton.enabled = True
         
 
 susPrestige = Button(enabled=False,scale_x=.39,scale_y=.2,texture='Prestige.png',x=-.6,y=-.2)
@@ -217,7 +242,7 @@ susClickerPowerup.on_click = def():
         susScoreMultiplierCost = Math.round(susScoreMultiplierCost*1.75)
         susLevelUp.play()
 susClickerPowerup.fit_to_text()
-susScoreText = Button(color=color.gray,text_color=color.black,text=`Suses: ${susScore}`,x=0,y=.4)
+susScoreText = Button(enabled=True,color=color.gray,text_color=color.black,text=`Suses: ${susScore}`,x=0,y=.4)
 susScoreText.fit_to_text()
 
 def saveGame():
