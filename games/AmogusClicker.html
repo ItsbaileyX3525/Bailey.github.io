@@ -21,6 +21,7 @@ set_background_color('rgb(40,40,40)')
 set_window_color('rgb(24,24,24)')
 
 background = Entity(texture='bg.gif', scale=[1.8,1.005], z=10)
+settingsBackgroud = Entity(enabled=False,texture='NootNoot.gif', scale=[1.8,1.005], z=10)
 
 startGame = Button(scale=3.1,text='Click to start game!',text_color=color.white,color=color.black,z=-9)
 startGame.on_click = def():
@@ -36,19 +37,18 @@ muteMusic = Button(x=-.6,y=.2,enabled=False,scale=.15,texture='SpeakerMute.png')
 muteMusic.on_click = def():
     if muteMusic.texture == 'Speaker.png':
         music.pause();
-        muteMusic.texture = 'SpeakerMute.png'
+        muteMusicText.enabled = False
         localStorage.setItem("MusicMuted", true)
     else:
         music.play()
-        muteMusic.texture = 'Speaker.png' 
+        muteMusic.texture = 'Speaker.png'
         localStorage.setItem("MusicMuted", false)  
 
-if localStorage.getItem("ClickMuted") == "true":
+if localStorage.getItem("MusicMuted") == "true":
     muteMusic.texture = 'SpeakerMute.png'
 else:
     muteMusic.texture = 'Speaker.png'
 
-#muteClick = Button(x=-.6,y=-.2,enabled=True,scale=.15,texture='SpeakerMute.png')
 
 muteClick = Button(x=-.6,y=-.2,enabled=False,scale=.15,texture='SpeakerMute.png')
 muteClick.on_click = def():
@@ -66,12 +66,20 @@ if localStorage.getItem("ClickMuted") == "true":
 else:
     muteClick.texture = 'Speaker.png'
 
+muteMusicText = Text(enabled=False,text_color=color.white,text='Mute music',y=-.2725,x=-.1)
+muteClickText = Text(enabled=False,text_color=color.white,text='Mute click sounds',y=-.665,x=-.1)
+
+
 settingsButton = Button(enabled=True,scale=.1,texture="Settings.png",x=.7,y=.4)
 settingsButton.on_click = def():
     if muteMusic.enabled:
         muteMusic.enabled = False
         e.enabled = False
         muteClick.enabled = False
+        background.enabled = True
+        settingsBackgroud.enabled = False
+        muteClickText.enabled = False
+        muteMusicText.enabled = False
         shopButton.enabled = True
         susClicker.enabled = True
         susScoreText.enabled = True
@@ -79,20 +87,10 @@ settingsButton.on_click = def():
         muteMusic.enabled = True
         e.enabled = True
         muteClick.enabled = True
-        shopButton.enabled = False
-        susClicker.enabled = False
-        susScoreText.enabled = False
-settingsButton = Button(enabled=True,scale=.1,texture="Settings.png",x=.7,y=.4)
-settingsButton.on_click = def():
-    if muteMusic.enabled:
-        muteMusic.enabled = False
-        e.enabled = False
-        shopButton.enabled = True
-        susClicker.enabled = True
-        susScoreText.enabled = True
-    else:
-        muteMusic.enabled = True
-        e.enabled = True
+        settingsBackgroud.enabled = True
+        background.enabled = False
+        muteClickText.enabled = True
+        muteMusicText.enabled = True
         shopButton.enabled = False
         susClicker.enabled = False
         susScoreText.enabled = False
@@ -112,7 +110,7 @@ fileInput.addEventListener('change', function() {
 });
 
     
-e = Button(enabled=False,scale_y=.1,scale_x=.3,y=.4,x=-.5,text='Change music')
+e = Button(enabled=False,scale_y=.1,scale_x=.3,y=.4,x=0,text='Change music')
 e.el.appendChild(fileInput)
 e.fit_to_text()
 
