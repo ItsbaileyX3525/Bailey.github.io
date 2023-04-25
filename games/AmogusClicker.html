@@ -37,7 +37,7 @@ muteMusic = Button(x=-.6,y=.2,enabled=False,scale=.15,texture='SpeakerMute.png')
 muteMusic.on_click = def():
     if muteMusic.texture == 'Speaker.png':
         music.pause();
-        muteMusicText.enabled = False
+        muteMusic.texture = 'SpeakerMute.png'
         localStorage.setItem("MusicMuted", true)
     else:
         music.play()
