@@ -127,6 +127,7 @@ susGreenCost = localStorage.getItem("SusGreenCost")
 susPinkCost = localStorage.getItem("SusPinkCost")
 susPinks = localStorage.getItem("SusPinks")
 stopGen = False
+canClick = True
 
 if localStorage.getItem("MusicMuted") == null
     musicMuted = false
@@ -185,13 +186,19 @@ susPinkCost = parseInt(susPinkCost, 10)
 
 susClicker = Button(scale=.2,x=-.4,color=color.clear,texture='Red.png')
 susClicker.on_click = def():
-    susScore += 1 * susScoreMultiplier
-    susClicker.scale = [e*1.25 for e in [.23,.23]]
-    susClicker.animate('scale_x', .2, duration=.1)
-    susClicker.animate('scale_y', .2, duration=.1)
-    susClick.pause()
-    susClick.currentTime = 0
-    susClick.play()
+    if canClick:
+        susScore += 1 * susScoreMultiplier
+        susClicker.scale = [e*1.25 for e in [.23,.23]]
+        susClicker.animate('scale_x', .2, duration=.1)
+        susClicker.animate('scale_y', .2, duration=.1)
+        susClick.pause()
+        susClick.currentTime = 0
+        susClick.play()
+        canClick = False
+        after .06s:
+            canClick = True
+    else:
+        ;
 
 shopButton = Button(enabled=True,scale=.2,x=.6,texture='Shop.png')
 shopButton.on_click = def():
