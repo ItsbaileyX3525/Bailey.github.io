@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <head>
     <link rel="stylesheet" href="assets/slider.css">
     <link rel="stylesheet" href="assets/button.css">
@@ -23,4 +23,29 @@ if (window.location.pathname === '/home') {
 </script>
 THIS PAGE DOES NOT EXIST! HOW AND WHY ARE YOU HERE?!<br>
 <button class="button-2" onclick="window.location.href='/Home'">Return to homepage</button>
-<img src="assets/404.gif" class="fit-image" /> <br>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    height: 2000px; /* Height of the content */
+    background-image: url('assets/404.png');
+    background-repeat: repeat-y; /* Repeat image vertically */
+    background-size: contain; /* Fit the image to its container */
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <!-- Your content goes here -->
+</div>
+<script>
+  window.addEventListener('scroll', function() {
+    var container = document.querySelector('.container');
+    var contentHeight = container.offsetHeight;
+    var yOffset = window.pageYOffset;
+    var y = yOffset % contentHeight;
+    container.style.backgroundPositionY = y + 'px';
+  });
+</script>
