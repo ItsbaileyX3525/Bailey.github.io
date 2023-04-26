@@ -18,9 +18,8 @@
 ASSETS_FOLDER = 'AmogusClickerAssets/'
 set_orientation('horizontal')
 set_background_color('rgb(40,40,40)')
-set_window_color('rgb(24,24,24)')
+set_window_color('rgb(255,20,147)')
 
-background = Entity(texture='PokeClicker/bg.gif', scale=[1.8,1.005], z=10)
 settingsBackgroud = Entity(enabled=False,texture='PokeClicker/Pokepetter.png', scale=[1.8,1.005], z=10)
  
 startGame = Button(scale=3.1,text='Click to start game!',text_color=color.white,color=color.black,z=-9)
@@ -76,7 +75,6 @@ settingsButton.on_click = def():
         muteMusic.enabled = False
         e.enabled = False
         muteClick.enabled = False
-        background.enabled = True
         settingsBackgroud.enabled = False
         muteClickText.enabled = False
         muteMusicText.enabled = False
@@ -88,7 +86,6 @@ settingsButton.on_click = def():
         e.enabled = True
         muteClick.enabled = True
         settingsBackgroud.enabled = True
-        background.enabled = False
         muteClickText.enabled = True
         muteMusicText.enabled = True
         shopButton.enabled = False
@@ -183,12 +180,12 @@ susGreenCost = parseInt(susGreenCost, 10)
 susPinks = parseInt(susPinks, 10)
 susPinkCost = parseInt(susPinkCost, 10)
 
-susClicker = Button(scale=.25,x=-.4,color=color.clear,texture='PokeClicker/Pokepetter.png')
+susClicker = Button(scale=.45,x=-.4,color=color.clear,texture='PokeClicker/Pokepetter.png')
 susClicker.on_click = def():
     susScore += 1 * susScoreMultiplier
-    susClicker.scale = [e*1.25 for e in [.23,.23]]
-    susClicker.animate('scale_x', .2, duration=.1)
-    susClicker.animate('scale_y', .2, duration=.1)
+    susClicker.scale = [e*1.25 for e in [.25,.25]]
+    susClicker.animate('scale_x', .45, duration=.1)
+    susClicker.animate('scale_y', .45, duration=.1)
     susClick.pause()
     susClick.currentTime = 0
     susClick.play()
@@ -214,7 +211,7 @@ shopButton.on_click = def():
             settingsButton.enabled = True
         
 
-susPrestige = Button(enabled=False,scale_x=.39,scale_y=.2,texture='Prestige.png',x=-.3,y=0)
+susPrestige = Button(enabled=False,scale_x=.3,scale_y=.3,texture='PokeClicker/evilPoke.png',x=-.2,y=0.05)
 
 susPrestige.on_click = def():
     if susScore >= multiplierCost:
@@ -232,7 +229,7 @@ susPrestige.on_click = def():
             stopGen = False
 
 
-susGreen = Button(enabled=False,scale_x=.3,scale_y=.3, x=-.6,y=.3,color=color.clear,texture='PokeClicker/Pokepetter.png')
+susGreen = Button(enabled=False,scale_x=.3,scale_y=.3, x=-.6,y=.3,color=color.clear,texture='PokeClicker/sus1.jpg')
 
 susGreen.on_click = def():
     if susScore >= susGreenCost and not stopGen:
@@ -248,7 +245,7 @@ def susGreenFunc():
         if not stopGen:
             susGreenFunc()
 
-susPink = Button(enabled=False,scale_x=.3,scale_y=.3, x=-.6,y=-.1,color=color.clear,texture='PokeClicker/Pokepetter.png')
+susPink = Button(enabled=False,scale_x=.3,scale_y=.3, x=-.6,y=-.1,color=color.clear,texture='PokeClicker/sus2.jpg')
 
 susPink.on_click = def():
     if susScore >= susPinkCost and not stopGen:
