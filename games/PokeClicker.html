@@ -267,6 +267,8 @@ susClickerPowerup.on_click = def():
         susScore -= susScoreMultiplierCost
         susScoreMultiplier += 1
         susScoreMultiplierCost = Math.round(susScoreMultiplierCost*1.75)
+        susLevelUp.pause()
+        susLevelUp.currentTime = 0
         susLevelUp.play()
 susClickerPowerup.fit_to_text()
 susScoreText = Button(enabled=True,color=color.gray,text_color=color.black,text=`Suses: ${susScore}`,x=0,y=.4)
