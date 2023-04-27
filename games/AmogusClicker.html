@@ -109,7 +109,14 @@ fileInput.addEventListener('change', function() {
     const fileURL = URL.createObjectURL(file);
     music.src = fileURL;
     music.play();
+    localStorage.setItem('audioFile', fileURL);
 });
+
+const storedFileURL = localStorage.getItem('audioFile');
+if storedFileURL:
+    music.src = storedFileURL;
+    music.play();
+
 
     
 e = Button(enabled=False,scale_y=.1,scale_x=.3,y=.4,x=0,text='Change music')
