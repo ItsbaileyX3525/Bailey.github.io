@@ -60,7 +60,7 @@ muteClick.on_click = def():
         muteClick.texture = 'Speaker.png' 
         localStorage.setItem("PClickerMuted", false) 
 
-if localStorage.getItem("PClickMuted") == "true":
+if localStorage.getItem("PClickerMuted") == "true":
     muteClick.texture = 'SpeakerMute.png'
 else:
     muteClick.texture = 'Speaker.png'
