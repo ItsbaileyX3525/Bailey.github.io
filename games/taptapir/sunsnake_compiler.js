@@ -1,4 +1,5 @@
 print = console.log
+_class_names = ['Entity', 'Button', 'Text', 'HealthBar', 'RainbowSlider', 'InputField']
 
 function compile(script) {
     t = performance.now()
@@ -66,6 +67,12 @@ function compile(script) {
                     break
                 }
             }
+        }
+
+        if (all_lines[i].startsWith('class ')) {
+          class_name = all_lines[i].slice(6).split(' ')[0]
+          print('found class:', class_name)
+            _class_names.push(class_name)
         }
 
         lines.push(all_lines[i])
@@ -208,7 +215,7 @@ function compile(script) {
             }
         }
 
-        for (var class_name of ['Entity', 'Button', 'Text', 'HealthBar', 'RainbowSlider', 'InputField']) {
+        for (var class_name of _class_names) {
             is_first_word = lines[i].startsWith(`${class_name}(`) ? '' : ' '        // don't add space if line starts with 'Entity(', do add otherwise, to ensure we match the whole name
             if (lines[i].includes(`${is_first_word}${class_name}(`)) {
                 lines[i] = lines[i].replace(`${is_first_word}${class_name}(`, `${is_first_word}new ${class_name}(`)
@@ -384,10 +391,11 @@ function int(value) {
     return parseInt(value)
 }
 
-function Array_2d(w, h) {
+function Array_2d(w, h, default_value=0) {
     var tiles = new Array(w)
     for (var i = 0; i < tiles.length; i++) {
         tiles[i] = new Array(h);
+        tiles[i].fill(default_value)
     }
     return tiles
 }
