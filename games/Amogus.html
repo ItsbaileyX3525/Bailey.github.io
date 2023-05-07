@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amogus</title>
+</head>
+<body>
+    <script>
+        amogus = new Audio("AmogusAssets/amogus.mp3")
+        amogus.loop=true
+    </script>
+<script src="taptapir/taptapir.js"></script>
+<script type="text/javascript">
+
+True=true 
+False=false
+ASSETS_FOLDER="AmogusAssets/"
+set_orientation('horizontal')
+set_background_color('rgb(40,40,40)')
+set_window_color('rgb(24,24,24)')
+startGame = new Button({scale:3.1,text:'Click to start game!',text_color:color.white,color:color.black,z:-9})
+startGame.on_click = function() {
+    amogus.play()
+    startGame.enabled=False
+    background = new Entity({texture:'sussypussy.gif', scale:[1.8,1.005], z:10})
+}
+</script>
+<script src="taptapir/sunsnake_compiler.js"></script>
+</body>
+</html>
