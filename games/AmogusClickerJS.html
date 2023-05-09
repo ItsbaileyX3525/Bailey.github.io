@@ -22,6 +22,12 @@ True=true
 var Game = {
     Earn: function(number) {
       susScore+=number;
+    },
+    Multiplier: function(number) {
+        multiplier = number
+    },
+    Click: function(number) {
+        susScoreMultiplier = number
     }
   }
   
@@ -141,6 +147,8 @@ susGreens = localStorage.getItem("SusGreens")
 susGreenCost = localStorage.getItem("SusGreenCost")
 susPinkCost = localStorage.getItem("SusPinkCost")
 susPinks = localStorage.getItem("SusPinks")
+susYellowCost = localStorage.getItem("SusYellowCost")
+susYellows = localStorage.getItem("SusYellows")
 stopGen = False
 canClick = True
 if (localStorage.getItem("MusicMuted") === null) {
@@ -187,6 +195,14 @@ if (susPinkCost === null || susPinkCost === 0) {
     susPinkCost = 250
     localStorage.setItem("SusPinkCost", susPinkCost)
 }
+if (susYellowCost === null || susYellowCost === 0) {
+    susYellowCost = 625
+    localStorage.setItem("SusYellowCost", susYellowCost)
+}
+if (susYellows === null) {
+    susYellows = 0
+    localStorage.setItem("SusYellows", susYellows)
+}
 susScore = parseInt(susScore, 10)
 susScoreMultiplier = parseInt(susScoreMultiplier, 10)
 susScoreMultiplierCost = parseInt(susScoreMultiplierCost, 10)
@@ -196,6 +212,8 @@ susGreens = parseInt(susGreens, 10)
 susGreenCost = parseInt(susGreenCost, 10)
 susPinks = parseInt(susPinks, 10)
 susPinkCost = parseInt(susPinkCost, 10)
+susYellows = parseInt(susYellows, 10)
+susYellowCost = parseInt(susYellowCost, 10)
 susClicker = new Button({scale:.2,x:-.4,color:color.clear,texture:'Red.png'})
 susClicker.on_click = function() {
     if (canClick) {
@@ -223,6 +241,7 @@ shopButton.on_click = function() {
         susPrestige.enabled = False
         susGreen.enabled = False
         susPink.enabled = False
+        susYellow.enabled = False
         susClickerPowerup.enabled = False
     }
     else {
@@ -231,6 +250,7 @@ shopButton.on_click = function() {
         susPrestige.enabled = True
         susGreen.enabled = True
         susPink.enabled = True
+        susYellow.enabled = True
         susClickerPowerup.enabled = True
         if (muteMusic.enabled) {
             muteMusic.enabled = False
@@ -247,8 +267,10 @@ susPrestige.on_click = function() {
         multiplierCost += Math.round(multiplierCost * 1.3)
         susPinks = 0
         susGreens = 0
+        susYellows = 0
         susGreenCost = 100
         susPinkCost = 250
+        susYellowsCost = 625
         susScoreMultiplier = 1
         susScoreMultiplierCost = 50
         after(1.1, function() {
@@ -294,6 +316,26 @@ function susPinkFunc() {
         }
     })
 }
+susYellow = new Button({enabled:False,scale_x:.15,scale_y:.13,x:-.4,y:.1,color:color.clear,texture:'Yellow.png'})
+susYellow.on_click = function() {
+    if (susScore >= susYellowCost && ! stopGen) {
+        if (susYellows === 0)
+        {
+            susYellowFunc()
+        }
+        susScore -= susYellowCost
+        susYellows += 1
+        susYellowCost = Math.round(susYellowCost * 1.15)
+    }
+}
+function susYellowFunc() {
+    susScore += 20 * susYellows * multiplier
+    after(1, function() {
+        if (! stopGen) {
+            susYellowFunc()
+        }
+    })
+}
 susClickerPowerup = new Button({enabled:False,x:.3,scale_y:.15,scale_x:.255,text:'Click levelup.',})
 susClickerPowerup.on_click = function() {
     if (susScore>=susScoreMultiplierCost) {
@@ -314,6 +356,8 @@ function saveGame() {
     localStorage.setItem("SusGreenCost", susGreenCost)
     localStorage.setItem("SusPinkCost", susPinkCost)
     localStorage.setItem("SusPinks", susPinks)
+    localStorage.setItem("SusYellowCost", susYellowCost)
+    localStorage.setItem("SusYellows", susYellows)
     localStorage.setItem("SusScoreMultiplier", susScoreMultiplier)
     localStorage.setItem("SusScoreMultiplierCost", susScoreMultiplierCost)
     after(1, function() {
@@ -330,6 +374,9 @@ if (susGreens > 0) {
 }
 if (susPinks > 0) {
     susPinkFunc()
+}
+if (susYellows > 0) {
+    susYellowFunc()
 }
 </script>
 </body>
