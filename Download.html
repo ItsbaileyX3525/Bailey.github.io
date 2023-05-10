@@ -4,51 +4,157 @@
 <head>
   <meta charset="utf-8">
   <title>Application Download Page</title>
-  <style>
+<style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
     }
     
     h1 {
-      color: #00ff37;
+      color: #337ab7;
     }
     
     .container {
       margin-top: 100px;
     }
-    
-    .btn {
-      display: inline-block;
-      padding: 10px 20px;
-      font-size: 18px;
-      font-weight: bold;
-      text-align: center;
-      text-decoration: none;
-      background-color: #0b0fda;
-      color: #fff;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-    
-    .btn:hover {
-      background-color: #082ed4;
-    }
-  </style>
+  .middle{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%,-50%);
+}
+.confetti-button {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    display: inline-block;
+    font-size: 1em;
+    padding: 1em 2em;
+    margin-top: 100px;
+    margin-bottom: 60px;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #ff0081;
+    color: #fff;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+    box-shadow: 0 2px 25px rgba(255, 0, 130, 0.5);
+  }
+  .confetti-button:focus { outline: 0; }
+  
+  .confetti-button:before, .confetti-button:after {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 140%;
+    height: 100%;
+    left: -20%;
+    z-index: -1000;
+    transition: all ease-in-out 0.5s;
+    background-repeat: no-repeat;
+  }
+  .confetti-button:before {
+    display: none;
+    top: -75%;
+    background-image: radial-gradient(circle, #ff0081 20%, transparent 20%),
+     radial-gradient(circle, transparent 20%, #ff0081 20%, transparent 30%),
+     radial-gradient(circle, #ff0081 20%, transparent 20%), 
+     radial-gradient(circle, #ff0081 20%, transparent 20%), 
+     radial-gradient(circle, transparent 10%, #ff0081 15%, transparent 20%), 
+     radial-gradient(circle, #ff0081 20%, transparent 20%), 
+     radial-gradient(circle, #ff0081 20%, transparent 20%),
+     radial-gradient(circle, #ff0081 20%, transparent 20%),
+     radial-gradient(circle, #ff0081 20%, transparent 20%);
+    background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%,
+     10% 10%, 18% 18%;
+  }
+   .confetti-button:after {
+    display: none;
+    bottom: -75%;
+    background-image: radial-gradient(circle, #ff0081 20%, transparent 20%),
+     radial-gradient(circle, #ff0081 20%, transparent 20%), 
+     radial-gradient(circle, transparent 10%, #ff0081 15%, transparent 20%), 
+     radial-gradient(circle, #ff0081 20%, transparent 20%),
+     radial-gradient(circle, #ff0081 20%, transparent 20%),
+     radial-gradient(circle, #ff0081 20%, transparent 20%),
+     radial-gradient(circle, #ff0081 20%, transparent 20%);
+    background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
+  }
+  
+  .confetti-button:active {
+    transform: scale(0.9);
+    background-color: #e60074;
+    box-shadow: 0 2px 25px rgba(255, 0, 130, 0.2);
+  }
+  
+  .confetti-button.animate:before {
+    display: block;
+    animation: topBubbles ease-in-out 0.75s forwards;
+  }
+  
+  .confetti-button.animate:after {
+    display: block;
+    animation: bottomBubbles ease-in-out 0.75s forwards;
+  }
+   @keyframes
+  topBubbles {  0% {
+   background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 
+   55% 90%, 70% 90%;
+  }
+   50% {
+   background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 
+   65% 20%, 90% 30%;
+  }
+   100% {
+   background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%,
+    65% 10%, 90% 20%;
+   background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+  }
+  @keyframes
+  bottomBubbles {  0% {
+   background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%;
+  }
+   50% {
+   background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%;
+  }
+   100% {
+   background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%;
+   background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+  }</style>
 </head>
 
 <body>
   <div class="container">
     <h1>Welcome to the Application Download Page</h1>
     <p>Click the button below to download the application.</p>
-    <a href="#" class="btn" id="downloadBtn">Download Now</a>
-  </div>
-
+    <body>
+      <div class="middle">
+         <a href="SusClicker.apk"><button class="confetti-button">Click me!</button></a>
+      </div>
+      
+      <script src="style.js"></script>
   <script>
-    document.getElementById('downloadBtn').addEventListener('click', function () {
-      // Change the URL below to the desired page you want to open
-      window.location.href = '../SusClicker.apk';
-    });
+var animateButton = function(e) {
+
+e.preventDefault;
+//reset animation
+e.target.classList.remove('animate');
+
+e.target.classList.add('animate');
+setTimeout(function(){
+  e.target.classList.remove('animate');
+},700);
+};
+
+var classname = document.getElementsByClassName("confetti-button");
+
+for (var i = 0; i < classname.length; i++) {
+classname[i].addEventListener('click', animateButton, false);
+}
   </script>
 </body>
 
