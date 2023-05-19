@@ -45,7 +45,7 @@ body {
   transform: translate(-50%, -5%);
   text-align: center;
 }
-input {
+input, textarea {
   pointer-events: auto;
   height: 100%;
   width: 100%;
@@ -55,6 +55,8 @@ input {
   background-color: inherit;
   border-width: inherit;
   text-indent: .5em;
+  resize: none;
+  color: inherit;
 }
 `
 document.head.append(style)
@@ -921,7 +923,7 @@ class RainbowSlider extends Entity {
 
 class InputField extends Entity {
     constructor(options=false) {
-        let settings = {roundness:.5, color:color.smoke, text_size:2, text_color:color.azure, value:''}
+        let settings = {roundness:.5, color:color.smoke, text_size:2, value:''}
         for (const [key, value] of Object.entries(options)) {
             settings[key] = value
         }
