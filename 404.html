@@ -21,6 +21,38 @@ if (window.location.pathname === '/home') {
     window.location.replace('/games/Platformer');
   }
 </script>
+<script>
+  const lowercasePaths = [
+    '/home',
+    '/code',
+    '/portfolio',
+    '/sunsnake',
+    '/download',
+    '/encryption',
+    '/games/amogusclicker',
+    '/games/platformer'
+  ];
+
+  const uppercasePaths = [
+    '/Home',
+    '/Code',
+    '/Portfolio',
+    '/Sunsnake',
+    '/Download',
+    '/Encryption',
+    '/Games/AmogusClicker',
+    '/Games/Platformer'
+  ];
+
+  const currentPage = window.location.pathname.toLowerCase();
+
+  const index = lowercasePaths.indexOf(currentPage);
+
+  if (index !== -1) {
+    const redirectPath = uppercasePaths[index];
+    window.location.replace(redirectPath);
+  }
+</script>
 THIS PAGE DOES NOT EXIST! HOW AND WHY ARE YOU HERE?!<br>
 <button class="button-2" onclick="window.location.href='/Home'">Return to homepage</button>
 <style>
