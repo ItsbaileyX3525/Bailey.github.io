@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mom's Spaggy!</title>
+  <link rel="shortcut icon" type="image/jpg" href="SpaggyAssets/spaggy.jpg">
+</head>
+<body>
+<script>
+  //susClick = new Audio("AmogusClickerAssets/PokeClicker/sus.mp3")
+  music = new Audio("SpaggyAssets/music.ogg")
+  music.loop=True
+</script>
+  
+  
+<script src="taptapir/taptapir.js"></script>
+<script type="text/sunsnake">
+ASSETS_FOLDER = 'SpaggyAssets/'
+set_orientation('horizontal')
+set_background_color('rgb(40,40,40)')
+
+startGame = Button(scale=[3,1],text='Click to Eat spaggy',text_color=color.white,color=color.black,z=-9)
+startGame.on_click = def():
+    music.play()
+    startGame.enabled=False
+
+Spaggy = Entity(texture='Spaggy.jpg',scale=[2,1])
+</script>
+<script src="taptapir/sunsnake_compiler.js"></script>
+
+</body>
+</html>

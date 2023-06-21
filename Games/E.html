@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>E emulator</title>
+  <link rel="shortcut icon" type="image/jpg" href="EAssets/E.jpg">
+</head>
+<body>
+<script>
+  //susClick = new Audio("AmogusClickerAssets/PokeClicker/sus.mp3")
+  music = new Audio("EAssets/music.ogg")
+  music.loop=True
+</script>
+  
+  
+<script src="taptapir/taptapir.js"></script>
+<script type="text/sunsnake">
+ASSETS_FOLDER = 'EAssets/'
+set_orientation('horizontal')
+set_background_color('rgb(40,40,40)')
+
+startGame = Button(scale=[3,1],text='Click to E',text_color=color.white,color=color.black,z=-9)
+startGame.on_click = def():
+    music.play()
+    startGame.enabled=False
+
+E = Entity(texture='E.jpg',scale=[2,1])
+</script>
+<script src="taptapir/sunsnake_compiler.js"></script>
+
+</body>
+</html>
