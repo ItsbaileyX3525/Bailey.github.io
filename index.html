@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta property="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:description" content="The home page of Bailey's awesome website!">
+    <meta property="og:author" content="Bailey Miles">
+    <meta property="og:image" content="assets/icon.png">
+    <meta property="og:image:type" content="image/png">
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+    <title>Homepage</title>
+    <div style="max-width: 700px; margin: auto;">
+        &nbsp;&nbsp;<a href="../"><img src="assets/icon.png" style="width:65px; height: auto; margin-right:10px;"/></a>
+        <a href="Games/" class="headerButtons">Games</a>
+        <a href="" class="headerButtons">Portfolio</a>
+        <a href="" class="headerButtons">Contact info</a>
+</head>
+<body>
+    <style src='style.css'></style>
+    <h1 id="header" style="text-align: center; scale: 2.4; margin-top: 80px;">Bailey miles</h1>
+    <p>
+        hello everyone my name is Bailey, I code and 
+        make games aswell as websites, like this one here!
+    </p>
+<script>
+function copyText(id) {
+var tooltipText = document.getElementById("tooltipText");
+var r = document.createRange();
+r.selectNode(document.getElementById(id));
+window.getSelection().removeAllRanges();
+window.getSelection().addRange(r);
+document.execCommand('copy');
+window.getSelection().removeAllRanges();
+
+tooltipText.textContent = "Discord ID copied!";
+    setTimeout(function() {
+        tooltipText.textContent = "Copy text";
+    }, 2000);}
+</script>
+<p id="CopyText" style="font-size: 0px;">itsbaileyx</p>
+<div id="footer">
+  <div class="image-container"></div>
+    <div class="tooltip">
+      <a onclick="copyText('CopyText');return false;"><img src="assets/icons/dickcord.webp"></a>
+      <span id="tooltipText" class="tooltiptext">Copy text</span>
+    </div>
+        <a href="https://youtube.com/@itsbaileyx3525"><img src="assets/icons/youtube.webp" width="60px" height="35px" style="transform: translateY(-12px);"></a>
+        &nbsp;&nbsp;<a href="mailto:baileyleah542@gmail.com"><img src="assets/icons/email.webp" width="45px" height="40px" style="transform: translateY(-8px)"></a>
+  </div>
+</div>
+
+</body>
+</html>
