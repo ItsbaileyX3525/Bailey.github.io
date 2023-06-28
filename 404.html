@@ -103,7 +103,9 @@ a.headers {
 
   </div>
 </div>
-
+<p style="display: none;" id="Rickroll">
+  get rickrolled >:) in 2023!
+</p>
 <script>
 
 let progress = document.getElementById("progress");
@@ -113,6 +115,7 @@ let songIcon = document.getElementById("songImage")
 let title = document.getElementById("songTitle")
 let artist = document.getElementById("songArtist")
 let source = document.getElementById("songSource")
+let hiddenText = document.getElementById("Rickroll")
 let currentSong = 1;
 
 function testLoadMetadata(){
@@ -141,6 +144,10 @@ function nextSong(){
     artist.innerHTML = "Rick Astley";
     title.innerHTML = "Never gonna give you up";
     songIcon.src = "assets/404/thumbnail2.webp";
+    if (hiddenText.style.display === 'none') {
+      hiddenText.style.display = "block";
+      window.scrollTo(0, document.body.scrollHeight);
+    }
     testLoadMetadata();
     song.play();
     if (ctrlIcon.classList.contains("fa-play")) {
@@ -169,6 +176,10 @@ function previousSong(){
     artist.innerHTML = "Rick Astley";
     title.innerHTML = "Never gonna give you up";
     songIcon.src = "assets/404/thumbnail2.webp";
+    if (hiddenText.style.display === 'none') {
+      hiddenText.style.display = "block";
+      window.scrollTo(0, document.body.scrollHeight);
+    }
     testLoadMetadata();
     song.play();
     if (ctrlIcon.classList.contains("fa-play")) {
