@@ -1,29 +1,51 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="assets/slider.css">
-    <link rel="stylesheet" href="assets/button.css">
-    <link rel="shortcut icon" type="image/png" href="assets/icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Error</title>
+    <link rel="stylesheet" href="songStyle.css">
+    <link rel="stylesheet" href="style.css">
+    <meta property="og:description" content="Uh oh! This webpage doesn't exist.">
+    <meta property="og:author" content="Bailey Miles">
+    <meta property="og:image" content="assets/icon.png">
+    <meta property="og:image:type" content="image/png">
+    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
+<style>
+a.headers {
+    color: whitesmoke;
+    border-color: hsl(219, 30%, 28%);
+
+    padding: 12px 28px;
+    border-radius: 2.4em;
+    border-width: 2px;
+    text-decoration: none;
+    font-size: 20px;
+    line-height: 2.9em;
+    border-style: solid;
+    background-color: transparent;
+    letter-spacing: 2px;
+    align-self: center;
+}
+</style>
+    <div style="max-width: 700px; margin: auto;">
+      &nbsp;&nbsp;<a href="../"><img src="assets/icon.png" style="width:65px; height: auto; margin-right:10px;transform: translateY(20px);"/></a>
+      <a href="../" class="headers">Home</a><div>
 </head>
 <script>
   const lowercasePaths = [
-    '/home',
-    '/code',
-    '/portfolio',
-    '/sunsnake',
+    '/credits',
     '/download',
-    '/encryption',
+    '/portfolio',
     '/games/amogusclicker',
     '/games/platformer',
     '/games/momsspaghetti'
   ];
 
   const uppercasePaths = [
-    '/Home',
-    '/Code',
-    '/Portfolio',
-    '/Sunsnake',
+    '/Credits',
     '/Download',
-    '/Encryption',
+    '/Portfolio',
     '/Games/AmogusClicker',
     '/Games/Platformer',
     '/Games/E'
@@ -37,32 +59,158 @@
     const redirectPath = uppercasePaths[index];
     window.location.replace(redirectPath);
   }
-</script>
-THIS PAGE DOES NOT EXIST! HOW AND WHY ARE YOU HERE?!<br>
-<button class="button-2" onclick="window.location.href='/Home'">Return to homepage</button>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-  }
-  .container {
-    height: 2000px; /* Height of the content */
-    background-image: url('assets/404.png');
-    background-repeat: repeat-y; /* Repeat image vertically */
-    background-size: contain; /* Fit the image to its container */
-  }
-</style>
-</head>
+</script></head>
 <body>
+<h1 id="header" style="text-align: center; scale: 2.4; margin-top: 80px;">Sorry this webpage<br> doesn't exist!</h1>
+<p style="transform: translateY(25px); scale: 1.4">
+  Thats alright though! If you think this webpage is correct and you came here <br>from a broken
+  link don't threat to send me an email at <a href="mailto:baileyleah542@gmail.com" style="text-decoration: none; color: salmon;">baileyleah542@gmail.com</a>
+</p>
+<p style="transform: translateY(20px); scale: 1.2">
+  Alternatively you can return to the home page by clicking 'Home' at the top of the page!
+</p>
+
+<p style="transform: translateY(40px); scale: 1.4">
+  Want to listen to some music?
+</p>
+<!--
+  Yes, Ryan, I built this myself ik its cool it only took a couple hours...
+-->
 <div class="container">
-  <!-- Your content goes here -->
+  <div class="music-player">
+   <nav>
+       <div class="circle">
+           <i class="fa-solid fa-angle-left"></i>
+       </div>        
+       <div class="circle">
+           <i class="fa-solid fa-bars"></i>
+       </div>
+   </nav>
+   <img src="assets/404/thumbnail.webp" class="song-img" id="songImage">
+   <h1 id="songTitle">Virtual insanity</h1>
+   <p id="songArtist">Jamiroquai</p>
+
+   <audio id="song"> 
+       <source src="assets/404/404 music.mp3" type="audio/mpeg" id="songSource">
+   </audio>
+   <input type="range" value="0" id="progress">
+
+   <div class="controls">
+       <div onclick = "previousSong()"><i class="fa-solid fa-backward" id="previousSong"></i></div>
+       <div onclick = "playPause()"><i class="fa-solid fa-play" id="ctrlIcon"></i></div>
+       <div onclick = "nextSong()"><i class="fa-solid fa-forward"></i></div>
+   </div>
+
+  </div>
 </div>
+
 <script>
-  window.addEventListener('scroll', function() {
-    var container = document.querySelector('.container');
-    var contentHeight = container.offsetHeight;
-    var yOffset = window.pageYOffset;
-    var y = yOffset % contentHeight;
-    container.style.backgroundPositionY = y + 'px';
-  });
-</script>
+
+let progress = document.getElementById("progress");
+let song = document.getElementById("song");
+let ctrlIcon = document.getElementById("ctrlIcon");
+let songIcon = document.getElementById("songImage")
+let title = document.getElementById("songTitle")
+let artist = document.getElementById("songArtist")
+let source = document.getElementById("songSource")
+let currentSong = 1;
+
+function testLoadMetadata(){
+song.onloadedmetadata = function(){
+    progress.max = song.duration;
+    progress.value = song.currentTime;
+   }
+}
+testLoadMetadata();
+function playPause(){
+   if (ctrlIcon.classList.contains("fa-pause")){
+       song.pause();
+       ctrlIcon.classList.remove("fa-pause");
+       ctrlIcon.classList.add("fa-play");
+   } else {
+       song.play();
+       ctrlIcon.classList.add("fa-pause");
+       ctrlIcon.classList.remove("fa-play");
+   }
+}
+function nextSong(){
+  if (currentSong === 1){
+    song.currentTime = 0;
+    currentSong += 1;
+    song.src = 'assets/404/404 music2.mp3';
+    artist.innerHTML = "Rick Astley";
+    title.innerHTML = "Never gonna give you up";
+    songIcon.src = "assets/404/thumbnail2.webp";
+    testLoadMetadata();
+    song.play();
+    if (ctrlIcon.classList.contains("fa-play")) {
+      ctrlIcon.classList.add("fa-pause");
+      ctrlIcon.classList.remove("fa-play");
+  }} else if (currentSong === 2){
+    song.currentTime = 0;
+    currentSong -= 1;
+    song.src = 'assets/404/404 music.mp3';
+    artist.innerHTML = "Jamiroquai";
+    title.innerHTML = "Virtual insanity";
+    songIcon.src = "assets/404/thumbnail.webp";
+    testLoadMetadata();
+    song.play();
+    if (ctrlIcon.classList.contains("fa-play")) {
+      ctrlIcon.classList.add("fa-pause");
+      ctrlIcon.classList.remove("fa-play");
+  }}
+}
+
+function previousSong(){
+  if (currentSong === 1){
+    song.currentTime = 0;
+    currentSong += 1;
+    song.src = 'assets/404/404 music2.mp3';
+    artist.innerHTML = "Rick Astley";
+    title.innerHTML = "Never gonna give you up";
+    songIcon.src = "assets/404/thumbnail2.webp";
+    testLoadMetadata();
+    song.play();
+    if (ctrlIcon.classList.contains("fa-play")) {
+      ctrlIcon.classList.add("fa-pause");
+      ctrlIcon.classList.remove("fa-play");
+  }} else if (currentSong === 2){
+    song.currentTime = 0;
+    currentSong -= 1;
+    song.src = 'assets/404/404 music.mp3';
+    artist.innerHTML = "Jamiroquai";
+    title.innerHTML = "Virtual insanity";
+    songIcon.src = "assets/404/thumbnail.webp";
+    testLoadMetadata();
+    song.play();
+    song.play();
+    if (ctrlIcon.classList.contains("fa-play")) {
+      ctrlIcon.classList.add("fa-pause");
+      ctrlIcon.classList.remove("fa-play");
+  }}
+}
+if (song.play()){
+   setInterval(()=>{
+       progress.value = song.currentTime;
+   },500);
+}
+
+progress.onchange = function(){
+   song.play();
+   song.currentTime = progress.value;
+   ctrlIcon.classList.add("fa-pause"); 
+   ctrlIcon.classList.remove("fa-play");
+}
+
+song.addEventListener("ended", function(){
+    nextSong();
+});
+
+if (!song.paused) {
+    ctrlIcon.classList.add("fa-pause");
+    ctrlIcon.classList.remove("fa-play"); 
+  } else {  
+  ctrlIcon.classList.add("fa-play");
+  ctrlIcon.classList.remove("fa-pause"); 
+}
+</script></body>
