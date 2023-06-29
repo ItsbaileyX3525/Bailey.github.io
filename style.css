@@ -1,94 +1,151 @@
 html * {
-    font-family: Helvetica
+font-family: Helvetica
 }
 body {
-    background-color: black;
-    --text_color: hsl(219, 31%, 75%);
+background-color: black;
+--text_color: hsl(219, 31%, 75%);
 
 }
 #header {
-    font-weight: bold;
-    background: linear-gradient(120deg, #1df4f8, #db05c6);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-decoration: none;
-  }
-  
+font-weight: bold;
+background: linear-gradient(120deg, #1df4f8, #db05c6);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
+text-decoration: none;
+font-size: 50px;
+}
+
 #footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #070707;
-    padding: 20px;
-    text-align: center;
+position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;
+background-color: #070707;
+padding: 20px;
+text-align: center;
 }
 .tooltip {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
+position: relative;
+display: inline-block;
+cursor: pointer;
 }
 .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: #000;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.3s;
+visibility: hidden;
+width: 120px;
+background-color: #000;
+color: #fff;
+text-align: center;
+border-radius: 6px;
+padding: 5px;
+position: absolute;
+z-index: 1;
+bottom: 125%;
+left: 50%;
+transform: translateX(-50%);
+opacity: 0;
+transition: opacity 0.3s;
 }
 .tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
+visibility: visible;
+opacity: 1;
 }
 p {
-    margin-top: 43px; text-align: center; font-size: 20px; color:var(--text_color); word-wrap: break-word;
+margin-top: 43px; 
+text-align: center; 
+font-size: 20px; 
+color:var(--text_color); 
+word-wrap: break-word;
+}
+h2 {
+margin-top: 43px; 
+text-align: center; 
+font-size: 35px; 
+background: linear-gradient(120deg, #ff0000, #0011ff);
+color: transparent; 
+word-wrap: break-word;
+background-clip: text;
+-webkit-background-clip: text;
 }
 a.headerButtons {
-    color: whitesmoke;
-    border-color: hsl(219, 30%, 28%);
+color: whitesmoke;
+border-color: hsl(219, 30%, 28%);
 
-    padding: 12px 28px;
-    border-radius: 2.4em;
-    border-width: 2px;
-    text-decoration: none;
-    font-size: 20px;
-    line-height: 2.9em;
-    border-style: solid;
-    background-color: transparent;
-    letter-spacing: 2px;
-    margin: 8px;
+padding: 12px 28px;
+border-radius: 2.4em;
+border-width: 2px;
+text-decoration: none;
+font-size: 20px;
+line-height: 2.9em;
+border-style: solid;
+background-color: transparent;
+letter-spacing: 2px;
+margin: 8px;
 }
 .image-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  .image-container a {
-    display: flex;
-    align-items: center;
-  }
-  
-  .image-container img {
-    vertical-align: middle;
-    max-height: 100%;
-  }
+display: flex;
+align-items: center;
+}
 
+.image-container a {
+display: flex;
+align-items: center;
+}
+
+.image-container img {
+vertical-align: middle;
+max-height: 100%;
+}
+
+.container {
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: #000;
+}
+.neon-wrapper {
+position: relative;
+display: inline-block;
+}
+
+.neon-wrapper:before {
+content: "";
+position: absolute;
+top: -10px;
+left: -10px;
+right: -10px;
+bottom: -10px;
+border-radius: 5px;
+pointer-events: none;
+animation: neon-animation 3s ease-in-out infinite;
+}
+
+.neon-wrapper iframe {
+border: none;
+width: 400px;
+height: 300px;
+}
+
+@keyframes neon-animation {
+0%, 25% {
+box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff, 0 0 80px #ff00ff, 0 0 120px #ff00ff;
+}
+25%, 50% {
+box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 80px #00ffff, 0 0 120px #00ffff;
+}
+50%, 99% {
+box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff0000, 0 0 80px #ff0000, 0 0 120px #ff0000;
+}
+99%, 100% {
+box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff, 0 0 80px #ff00ff, 0 0 120px #ff00ff;
+}
+}
 @media screen and (max-width: 480px) {
 #header {
-    font-size: 18px;
+font-size: 18px;
 }
 p {
-    font-size: 16px;
-    margin-top: 24px;
+font-size: 16px;
+margin-top: 24px;
 }
 }
-
