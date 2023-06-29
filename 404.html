@@ -130,10 +130,14 @@ function playPause(){
        song.pause();
        ctrlIcon.classList.remove("fa-pause");
        ctrlIcon.classList.add("fa-play");
+       songIcon.classList.add("anim-pause");
+       songIcon.classList.remove("anim-play");
    } else {
        song.play();
        ctrlIcon.classList.add("fa-pause");
        ctrlIcon.classList.remove("fa-play");
+       songIcon.classList.add("anim-play");
+       songIcon.classList.remove("anim-pause");
    }
 }
 function nextSong(){
@@ -220,8 +224,12 @@ song.addEventListener("ended", function(){
 if (!song.paused) {
     ctrlIcon.classList.add("fa-pause");
     ctrlIcon.classList.remove("fa-play"); 
+    songIcon.classList.remove("anim-pause");
+    songIcon.classList.add("anim-play");
   } else {  
   ctrlIcon.classList.add("fa-play");
-  ctrlIcon.classList.remove("fa-pause"); 
+  ctrlIcon.classList.remove("fa-pause");
+  songIcon.classList.add("anim-pause");
+  ongIcon.classList.remove("anim-play");
 }
 </script></body>
