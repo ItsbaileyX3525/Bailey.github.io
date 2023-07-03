@@ -12,11 +12,60 @@
     <div style="max-width: 700px; margin: auto;">
         &nbsp;&nbsp;<a href="../"><img src="../assets/icon.png" style="width:65px; height: auto; margin-right:10px;"/></a>
         <a href="../" class="headerButtons">Home</a>
-        <a href="" class="headerButtons">Portfolio</a>
+        <a href="../Portfolio.html" class="headerButtons">Portfolio</a>
         <a href="" class="headerButtons">Contact info</a>
 </head>
 <body>
+<style>
+.Imagecontainer {
+display: flex;
+align-items: center;
+}
+
+</style>
     <h1 id="header" style="text-align: center; margin-top: 80px;">Coding sector</h1>
+    <p>
+        Here you can find a collection of all my public games as
+        well as unreleased games.
+    </p>
+    <h2>Sus clicker</h2>
+    <p>
+        Sus clicker is one of the first games I made with python, and
+        because my friends liked it so much I remixed it into unity/C#
+    </p>
+    <!--
+    <div class="Imagecontainer">
+        <button id="prevBtn">&lt;</button>
+        <img id="image" src="../assets/icon.png" alt="Image" style="max-height: 200px; max-width: 200px;">
+        <button id="nextBtn">&gt;</button>
+      </div>-->
     
+
+
+
+
+<script>
+const images = ['../assets/icon.png', '../assets/icons/dickcord.webp', '../assets/icons/youtube.webp'];
+let currentImageIndex = 0;
+
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const image = document.getElementById('image');
+
+prevBtn.addEventListener('click', () => {
+if (currentImageIndex > 0) {
+currentImageIndex--;
+image.src = images[currentImageIndex];
+}
+});
+
+nextBtn.addEventListener('click', () => {
+if (currentImageIndex < images.length - 1) {
+currentImageIndex++;
+image.src = images[currentImageIndex];
+}
+});
+
+</script>    
 </body>
 </html>
