@@ -98,12 +98,12 @@ a.headers {
            <i class="fa-solid fa-bars"></i>
        </div>
    </nav>
-   <img src="assets/404/thumbnail.webp" class="song-img" id="songImage">
+   <img src="../assets/404/thumbnail.webp" class="song-img" id="songImage">
    <h1 id="songTitle">Virtual insanity</h1>
    <p id="songArtist">Jamiroquai</p>
 
    <audio id="song"> 
-       <source src="assets/404/404 music.mp3" type="audio/mpeg" id="songSource">
+       <source src="../assets/404/404 music.mp3" type="audio/mpeg" id="songSource">
    </audio>
    <input type="range" value="0" id="progress">
 
@@ -156,7 +156,7 @@ function nextSong(){
   if (currentSong === 1){
     song.currentTime = 0;
     currentSong += 1;
-    song.src = 'assets/404/404 music2.mp3';
+    song.src = '../assets/404/404 music2.mp3';
     artist.innerHTML = "Rick Astley";
     title.innerHTML = "Never gonna give you up";
     songIcon.src = "../assets/404/thumbnail2.webp";
