@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 - Error</title>
-    <link rel="stylesheet" href="songStyle.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../songStyle.css">
+    <link rel="stylesheet" href="../style.css">
     <meta property="og:description" content="Uh oh! This webpage doesn't exist.">
     <meta property="og:author" content="Bailey Miles">
-    <meta property="og:image" content="assets/icon.png">
+    <meta property="og:image" content="../assets/icon.png">
     <meta property="og:image:type" content="image/png">
     <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
 <style>
@@ -39,7 +39,7 @@ a.headers {
 
 </style>
     <div style="max-width: 700px; margin: auto;">
-      &nbsp;&nbsp;<a href="../"><img src="assets/icon.png" class="anim-pause" style="width:65px; height: auto; margin-right:10px;transform: translateY(20px);"/></a>
+      &nbsp;&nbsp;<a href="../"><img src="../assets/icon.png" class="anim-pause" style="width:65px; height: auto; margin-right:10px;transform: translateY(20px);"/></a>
       <a href="../" class="headers">Home</a><div>
 </head>
 <script>
@@ -159,7 +159,7 @@ function nextSong(){
     song.src = 'assets/404/404 music2.mp3';
     artist.innerHTML = "Rick Astley";
     title.innerHTML = "Never gonna give you up";
-    songIcon.src = "assets/404/thumbnail2.webp";
+    songIcon.src = "../assets/404/thumbnail2.webp";
     if (hiddenText.style.display === 'none') {
       hiddenText.style.display = "block";
       window.scrollTo(0, document.body.scrollHeight);
@@ -172,10 +172,10 @@ function nextSong(){
   }} else if (currentSong === 2){
     song.currentTime = 0;
     currentSong = 3;
-    song.src = 'assets/404/404 music3.mp3';
+    song.src = '../assets/404/404 music3.mp3';
     artist.innerHTML = "Roddy Rich";
     title.innerHTML = "Ballin' - Country cover";
-    songIcon.src = "assets/404/thumbnail3.webp";
+    songIcon.src = "../assets/404/thumbnail3.webp";
     testLoadMetadata();
     song.play();
     if (ctrlIcon.classList.contains("fa-play")) {
@@ -184,10 +184,10 @@ function nextSong(){
   }} else if (currentSong === 3) {
     song.currentTime = 0;
     currentSong = 1;
-    song.src = 'assets/404/404 music.mp3';
+    song.src = '../assets/404/404 music.mp3';
     artist.innerHTML = "Jamiroquai";
     title.innerHTML = "Virtual insanity";
-    songIcon.src = "assets/404/thumbnail.webp";
+    songIcon.src = "../assets/404/thumbnail.webp";
     testLoadMetadata();
     song.play();
     if (ctrlIcon.classList.contains("fa-play")) {
@@ -200,10 +200,10 @@ function previousSong(){
   if (currentSong === 1){
     song.currentTime = 0;
     currentSong = 3;
-    song.src = 'assets/404/404 music3.mp3';
+    song.src = '../assets/404/404 music3.mp3';
     artist.innerHTML = "Roddy Rich";
     title.innerHTML = "Ballin' - Country cover";
-    songIcon.src = "assets/404/thumbnail3.webp";
+    songIcon.src = "../assets/404/thumbnail3.webp";
     testLoadMetadata();
     song.play();
     if (ctrlIcon.classList.contains("fa-play")) {
@@ -212,10 +212,10 @@ function previousSong(){
   }} else if (currentSong === 2){
     song.currentTime = 0;
     currentSong = 1;
-    song.src = 'assets/404/404 music.mp3';
+    song.src = '../assets/404/404 music.mp3';
     artist.innerHTML = "Jamiroquai";
     title.innerHTML = "Virtual insanity";
-    songIcon.src = "assets/404/thumbnail.webp";
+    songIcon.src = "../assets/404/thumbnail.webp";
     testLoadMetadata();
     song.play();
     
@@ -225,10 +225,10 @@ function previousSong(){
   }} else if (currentSong === 3){
     song.currentTime = 0;
     currentSong = 2;
-    song.src = 'assets/404/404 music2.mp3';
+    song.src = '../assets/404/404 music2.mp3';
     artist.innerHTML = "Rick Astley";
     title.innerHTML = "Never gonna give you up";
-    songIcon.src = "assets/404/thumbnail2.webp";
+    songIcon.src = "../assets/404/thumbnail2.webp";
     if (hiddenText.style.display === 'none') {
       hiddenText.style.display = "block";
       window.scrollTo(0, document.body.scrollHeight);
