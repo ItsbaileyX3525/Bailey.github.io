@@ -5,8 +5,9 @@
     <meta property="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:description" content="The codee page of Bailey's awesome website!">
     <meta property="og:author" content="Bailey Miles">
-    <meta property="og:image" content="../assets/icon.png">
+    <meta property="og:image" content="https://baileyswebsite.ddns.net/assets/icon.png">
     <meta property="og:image:type" content="image/png">
+    <link rel="icon" href="../assets/icon.png">
     <link rel="stylesheet" type="text/css" href="../style.css" media="screen" />
     <title>Homepage</title>
     <div style="max-width: 700px; margin: auto;">
@@ -122,7 +123,14 @@ for (var i = 0; i < buttons.length; i++) {
 }
 
   </script>
-
+<script>
+  var currentUrl = window.location.href;
+  
+  if (currentUrl.endsWith(".html")) {
+      var newUrl = currentUrl.slice(0, -5);
+      window.location.href = newUrl;
+  }
+  </script>
 
 </body>
 </html>

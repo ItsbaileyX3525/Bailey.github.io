@@ -6,9 +6,10 @@
     <title>404 - Error</title>
     <link rel="stylesheet" href="../songStyle.css">
     <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="../assets/icon.png">
     <meta property="og:description" content="Uh oh! This webpage doesn't exist.">
     <meta property="og:author" content="Bailey Miles">
-    <meta property="og:image" content="../assets/icon.png">
+    <meta property="og:image" content="https://baileyswebsite.ddns.net/assets/icon.png">
     <meta property="og:image:type" content="image/png">
     <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
 <style>
@@ -265,5 +266,12 @@ if (!song.paused) {
   songIcon.classList.add("anim-pause");
   songIcon.classList.remove("anim-play");
 }
-</script>
+</script><script>
+  var currentUrl = window.location.href;
+  
+  if (currentUrl.endsWith(".html")) {
+      var newUrl = currentUrl.slice(0, -5);
+      window.location.href = newUrl;
+  }
+  </script>
 </body>

@@ -73,6 +73,13 @@ tooltipText.textContent = "Discord ID copied!";
         &nbsp;&nbsp;<a href="mailto:baileyleah542@gmail.com"><img src="assets/icons/email.webp" width="45px" height="40px" style="transform: translateY(-8px)"></a>
   </div>
 </div>
-
+<script>
+  var currentUrl = window.location.href;
+  
+  if (currentUrl.endsWith(".html")) {
+      var newUrl = currentUrl.slice(0, -5);
+      window.location.href = newUrl;
+  }
+  </script>
 </body>
 </html>

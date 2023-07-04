@@ -5,7 +5,8 @@
     <meta property="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:description" content="The codee page of Bailey's awesome website!">
     <meta property="og:author" content="Bailey Miles">
-    <meta property="og:image" content="../assets/icon.png">
+    <meta property="og:image" content="https://baileyswebsite.ddns.net/assets/icon.png">
+    <link rel="icon" href="../assets/icon.png">
     <meta property="og:image:type" content="image/png">
     <link rel="stylesheet" type="text/css" href="../style.css" media="screen" />
     <title>Homepage</title>
@@ -54,5 +55,21 @@ transform: translate(-50%, -50%);
         I doubt we would've been able to do it.
     </p>
     <div class="ButtonContainer"><div class="ButtonCenter"><a href="../Games/Platformer"><button style="scale: 2; align-self: center;background-color: #221c1c;color: whitesmoke;">Platformer.</button></a></div></div>
+    <h2>Other games</h2>
+    <p>
+        There are a few other games that I have made for the web that aren't really anything to talk about but I will list them here.<br><br>
+        &bull; <a href="../Games/AmogusClicker/PokeClicker" style="color: salmon; text-decoration: none;">Poke Clicker</a><br>
+        &bull; <a href="../Games/E/E" style="color: salmon; text-decoration: none;">E</a><br>
+        &bull; <a href="../Games/MomsSpaghetti/MomsSpaghetti" style="color: salmon; text-decoration: none;">moms Spaghetti</a><br>
+    </p>
+<script>
+var currentUrl = window.location.href;
+
+if (currentUrl.endsWith(".html")) {
+    var newUrl = currentUrl.slice(0, -5);
+    window.location.href = newUrl;
+}
+</script>
+      
 </body>
 </html>
