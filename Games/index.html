@@ -10,62 +10,49 @@
     <link rel="stylesheet" type="text/css" href="../style.css" media="screen" />
     <title>Homepage</title>
     <div style="max-width: 700px; margin: auto;">
-        &nbsp;&nbsp;<a href="../"><img src="../assets/icon.png" style="width:65px; height: auto; margin-right:10px;"/></a>
+        &nbsp;&nbsp;<a href="../"><img src="../assets/icon.png"style="width:65px; height: auto; margin-right:10px;transform: translateY(20px);"/></a>
         <a href="../" class="headerButtons">Home</a>
         <a href="../Portfolio.html" class="headerButtons">Portfolio</a>
         <a href="" class="headerButtons">Contact info</a>
 </head>
 <body>
 <style>
-.Imagecontainer {
-display: flex;
-align-items: center;
+.ButtonContainer {
+height: 50px;
+position: relative;
 }
 
+.ButtonCenter {
+margin: 0;
+position: absolute;
+top: 50%;
+left: 50%;
+-ms-transform: translate(-50%, -50%);
+transform: translate(-50%, -50%);
+}
 </style>
     <h1 id="header" style="text-align: center; margin-top: 80px;">Coding sector</h1>
     <p>
         Here you can find a collection of all my public games as
-        well as unreleased games.
+        well as unreleased games. If you don't want read through this and just want 
+        to see the games then you can go to this webpage <a href="../Games/Games" style="text-decoration: none; color: salmon">here</a>
     </p>
-    <h2>Sus clicker</h2>
+    <a href="../Games/AmogusClicker" style="text-decoration: none"><h2>Sus clicker</h2></a>
     <p>
         Sus clicker is one of the first games I made with python, and
-        because my friends liked it so much I remixed it into unity/C#
+        because my friends liked it so much I remixed it into unity/C#. You can 
+        download sus clicker from my <a href="https://itsbaileyx3525.itch.io/sus-clicker" style="text-decoration: none; color: salmon">itch account</a>
+        or you can play it on this website as a quick preview by just clicked the big button below.
     </p>
-    <!--
-    <div class="Imagecontainer">
-        <button id="prevBtn">&lt;</button>
-        <img id="image" src="../assets/icon.png" alt="Image" style="max-height: 200px; max-width: 200px;">
-        <button id="nextBtn">&gt;</button>
-      </div>-->
-    
-
-
-
-
-<script>
-const images = ['../assets/icon.png', '../assets/icons/dickcord.webp', '../assets/icons/youtube.webp'];
-let currentImageIndex = 0;
-
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-const image = document.getElementById('image');
-
-prevBtn.addEventListener('click', () => {
-if (currentImageIndex > 0) {
-currentImageIndex--;
-image.src = images[currentImageIndex];
-}
-});
-
-nextBtn.addEventListener('click', () => {
-if (currentImageIndex < images.length - 1) {
-currentImageIndex++;
-image.src = images[currentImageIndex];
-}
-});
-
-</script>    
+    <div class="ButtonContainer"><div class="ButtonCenter"><a href="../Games/AmogusClicker/AmogusClicker"><button style="scale: 2; align-self: center;background-color: #221c1c;color: whitesmoke;">Sus clicker.</button></a></div></div>
+    <a href="../Games/Platformer" style="text-decoration: none"><h2>Platformer</h2></a>
+    <p>
+        Platformer was the first web-based game that I've made where I've made I had to make physics for the game and basic 
+        collision detection so the player can stand on blocks as the game engine we used was called taptapir which only has a
+        certain amount of functions so using it and my profound knowledge of physics and coding I was able to do it.
+        That's not to say I did it by myself as I had a good friend helping me make the game as we made it together and without him
+        I doubt we would've been able to do it.
+    </p>
+    <div class="ButtonContainer"><div class="ButtonCenter"><a href="../Games/Platformer"><button style="scale: 2; align-self: center;background-color: #221c1c;color: whitesmoke;">Platformer.</button></a></div></div>
 </body>
 </html>
