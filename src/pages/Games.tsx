@@ -60,6 +60,30 @@ const games: Game[] = [
     genre: 'Trivia',
     projectUrl: 'https://itsbaileyx3525.itch.io/bddarq',
   },
+  {
+    id: 6,
+    title: 'Clicker heros',
+    description:
+      'Another clicker game but its based on heroes!',
+    imageUrl:
+      'https://img.itch.zone/aW1nLzEzMDU1MjM2LnBuZw==/347x500/Jusved.png',
+    releaseDate: '2024',
+    platform: 'Mobile',
+    genre: 'Clicker',
+    projectUrl: 'https://itsbaileyx3525.itch.io/clicker-heros',
+  },
+  {
+    id: 7,
+    title: 'Nextbots',
+    description:
+      'A python-ursina game where you avoid PNGs',
+    imageUrl:
+      'https://img.itch.zone/aW1nLzEwODUxMzQxLmdpZg==/347x500/UwFA6u.gif',
+    releaseDate: '2024',
+    platform: 'PC',
+    genre: 'Idk again lol',
+    projectUrl: 'https://itsbaileyx3525.itch.io/nextbots',
+  },
 ];
 
 export const Games: React.FC = () => {
