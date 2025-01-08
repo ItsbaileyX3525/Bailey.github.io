@@ -42,11 +42,23 @@ const games: Game[] = [
     description:
       'A simple game where you look for the enemy and survive till 6AM',
     imageUrl:
-      'https://img.itch.zone/aW1nLzEwOTE2MDg2LnBuZw==/347x500/fpSLIo.png',
+      'https://img.itch.zone/aW1nLzE4MjgzNDI5LmpwZWc=/315x250%23c/dd2UE0.jpeg',
     releaseDate: '2024',
     platform: 'PC',
     genre: 'Idk, lol',
     projectUrl: 'https://itsbaileyx3525.itch.io/into-the-abyss',
+  },
+  {
+    id: 5,
+    title: 'BDDARQ',
+    description:
+      'A game where you answer computing questions',
+    imageUrl:
+      'https://img.itch.zone/aW1nLzE4NjUzNTU2LnBuZw==/315x250%23c/Ohi%2F8x.png',
+    releaseDate: '2024',
+    platform: 'PC',
+    genre: 'Trivia',
+    projectUrl: 'https://itsbaileyx3525.itch.io/bddarq',
   },
 ];
 
